@@ -1444,7 +1444,7 @@
   flex-grow: 1;
 }
 
-/* Premium Background Image Hover Layer */
+/* Premium Background Image Layer (Always visible by default) */
 .case-card-hover-bg {
   position: absolute;
   top: 0;
@@ -1457,8 +1457,8 @@
   background-position: top center;
   background-repeat: no-repeat;
   z-index: 0;
-  opacity: 0;
-  transform: scale(1.03);
+  opacity: 0.85;
+  transform: scale(1);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
@@ -1479,10 +1479,10 @@
   z-index: 1;
 }
 
-/* On hover, fade in the background image backdrop with gorgeous micro-zoom */
+/* On hover, subtle zoom-in interactive effect for background */
 .bento-case-card:hover .case-card-hover-bg {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1.04);
 }
 
 /* Individual Interactive Previews (Deprecated, kept for reference/fallback) */
@@ -1843,7 +1843,142 @@
   letter-spacing: 0.05em;
 }
 
+/* --- BROWSERS & INTERACTIVE WEB SCREENSHOTS PREVIEW SYSTEM --- */
 
+/* Browser Mockup Container */
+.browser-mockup {
+  width: 100%;
+  background: rgba(10, 12, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.bento-case-card:hover .browser-mockup {
+  border-color: rgba(19, 181, 92, 0.25);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(19, 181, 92, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Browser Window Header */
+.browser-header {
+  display: flex;
+  align-items: center;
+  background: rgba(15, 18, 28, 0.85);
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 12px;
+}
+
+/* Window Control Dots */
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.browser-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.browser-dot.red { background-color: #ef4444; }
+.browser-dot.yellow { background-color: #eab308; }
+.browser-dot.green { background-color: #22c55e; }
+
+/* Address Bar styling */
+.browser-address {
+  flex-grow: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+/* Screenshot Content Wrap */
+.browser-content {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #080a10;
+  overflow: hidden;
+}
+
+.preview-screenshot {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.screenshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-case-card:hover .screenshot-img {
+  transform: scale(1.05);
+}
+
+/* Sizing and Layout Rules (Desktop side-by-side for wide cards) */
+@media (min-width: 993px) {
+  .case-wide .case-card-main-layout {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+  .case-wide .case-card-details-col {
+    width: 55%;
+    flex-shrink: 0;
+  }
+  .case-wide .case-card-preview-col {
+    width: 45%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .case-standard .case-card-main-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .case-standard .case-card-details-col {
+    width: 100%;
+  }
+  .case-standard .case-card-preview-col {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .case-card-main-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .case-card-details-col {
+    width: 100%;
+  }
+  .case-card-preview-col {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
 
 /* RESPONSIVE FOR BENTO PROJECTS */
 @media (max-width: 1100px) {
