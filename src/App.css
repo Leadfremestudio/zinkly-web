@@ -31,7 +31,7 @@
 }
 
 .logo-web {
-  color: var(--primary-green);
+  color: #ffffff;
 }
 
 .logo-castle {
@@ -170,12 +170,14 @@
 
 /* CAROUSEL BASE */
 .carousel-container {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100vw;
   height: 100vh;
   min-height: 750px;
   background-color: var(--bg-dark);
   overflow: hidden;
+  z-index: 1;
 }
 
 /* Slides */
@@ -197,6 +199,16 @@
   z-index: 2;
 }
 
+.slide-bg-parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(calc(var(--scroll-y-raw, 0) * 0.45px));
+  will-change: transform;
+}
+
 /* Ken Burns Zoom Effect */
 .slide-bg {
   position: absolute;
@@ -214,7 +226,6 @@
   transform: scale(1);
 }
 
-/* Slide Overlay Gradients */
 .slide-overlay {
   position: absolute;
   top: 0;
@@ -227,7 +238,7 @@
   z-index: 2;
 }
 
-/* Carousel Content Container */
+/* Carousel Content Container with Parallax Shift & Opacity Fade */
 .carousel-content {
   position: relative;
   width: 100%;
@@ -238,6 +249,9 @@
   justify-content: center;
   align-items: flex-start;
   z-index: 10;
+  transform: translateY(calc(var(--scroll-y-raw, 0) * 0.22px));
+  opacity: calc(1 - var(--scroll-y-raw, 0) / 750);
+  will-change: transform, opacity;
 }
 
 /* TYPOGRAPHY WITH ENTRANCE ANIMATIONS */
@@ -269,46 +283,17 @@
   transition: opacity 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Title highlighting elements matching reference */
-.title-accent-wrapper {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-}
-
-.accent-green-symbol {
-  color: var(--primary-green);
-  font-weight: 900;
-  position: relative;
+/* Prevent word splitting across lines while styling the first letter */
+.accent-word {
   display: inline-block;
-  margin-right: -4px;
+  white-space: nowrap;
 }
 
-.accent-green-dot {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 10px;
-  background-color: var(--primary-green);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--primary-green);
+.accent-green-char {
+  color: #ffffff;
 }
 
-.accent-green-dot::after {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1px solid var(--primary-green);
-  animation: pulse-dot 2.5s infinite ease-out;
-}
 
-@keyframes pulse-dot {
-  0% { transform: scale(0.5); opacity: 1; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
 
 .hero-description {
   font-size: 18px;
@@ -471,15 +456,7 @@
   fill: #ffffff;
 }
 
-.floating-whatsapp {
-  left: 30px;
-  background: var(--whatsapp-green);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
-}
 
-.floating-whatsapp:hover {
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
-}
 
 .floating-chat {
   right: 30px;
@@ -502,6 +479,7 @@
   align-items: center;
   z-index: 10;
   border-top: 1px solid #eef2f5;
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .about-bg-glow {
@@ -561,7 +539,7 @@
   color: #121316;
   background: transparent;
   border: 1px solid #121316;
-  border-radius: 30px;
+  border-radius: 14px;
   text-decoration: none;
   transition: var(--transition-smooth);
 }
@@ -633,6 +611,237 @@
 
 .collage-image-wrapper:hover .collage-image {
   transform: scale(1.05);
+}
+
+/* SERVICES SECTION */
+.services-section {
+  position: relative;
+  background-color: #f4f4f4; /* Subtle soft grey backdrop */
+  padding: 120px 8%;
+  z-index: 10;
+  border-top: 1px solid #eef2f5;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 70px;
+}
+
+.services-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-green);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.services-heading {
+  font-size: 42px;
+  line-height: 1.3;
+  font-weight: 800;
+  color: #121316;
+  margin: 0;
+}
+
+.view-all-btn {
+  display: inline-block;
+  padding: 12px 34px;
+  font-family: var(--font-headings);
+  font-size: 14px;
+  font-weight: 600;
+  color: #121316;
+  background: transparent;
+  border: 1px solid #c8d2d9;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.view-all-btn:hover {
+  color: #ffffff;
+  background-color: #121316;
+  border-color: #121316;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.service-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  padding: 44px 34px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  z-index: 1;
+}
+
+/* Hide standard mouse cursor on desktop screens when over cards to immerse the custom bubble cursor */
+@media (min-width: 1025px) {
+  .service-card {
+    cursor: none;
+  }
+}
+
+/* Removed black radial background center expanding hover effect */
+.service-card::before {
+  content: none;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
+  border-color: #e2e8f0;
+}
+
+.service-card-title {
+  font-family: var(--font-headings);
+  font-size: 22px;
+  font-weight: 700;
+  color: #121316;
+  margin: 25px 0 15px 0;
+  transition: color 0.4s ease;
+}
+
+.service-card-desc {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #555c66;
+  margin-bottom: 35px;
+  transition: color 0.4s ease;
+}
+
+.service-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.circle-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.service-card:hover .circle-icon {
+  transform: scale(1.1);
+}
+
+.pink-bg {
+  background-color: #ff2d55;
+  border: 2px solid #ff2d55;
+  color: #ffffff;
+}
+
+.service-card:hover .pink-bg {
+  background-color: transparent;
+  color: #ff2d55;
+}
+
+.blue-bg {
+  background-color: #4a5cf7;
+  border: 2px solid #4a5cf7;
+  color: #ffffff;
+}
+
+.service-card:hover .blue-bg {
+  background-color: transparent;
+  color: #4a5cf7;
+}
+
+.green-bg {
+  background-color: #109f50;
+  border: 2px solid #109f50;
+  color: #ffffff;
+}
+
+.service-card:hover .green-bg {
+  background-color: transparent;
+  color: #109f50;
+}
+
+.service-tech-logos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-top: 1px solid #eef2f5;
+  padding-top: 20px;
+  color: #64748b;
+  transition: border-color 0.4s ease, color 0.4s ease;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Custom Cursor Follower Container - Direct absolute positioning tracker, no lag, no CSS transform conflict */
+.custom-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  margin-top: -35px; /* Perfect pointer tip centering */
+  margin-left: -35px;
+  pointer-events: none;
+  z-index: 9999;
+  display: block;
+  will-change: transform;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease,
+              visibility 0.3s ease;
+}
+
+.custom-cursor-follower.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Inner bubble - Handles CSS scale-up and fade transition smoothly */
+.cursor-bubble {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 8px 24px rgba(19, 181, 92, 0.4);
+}
+
+.cursor-bubble.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.cursor-text {
+  color: #ffffff;
+  font-family: var(--font-headings);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* RESPONSIVE MEDIA QUERIES */
@@ -749,9 +958,7 @@
     height: 44px;
   }
   
-  .floating-whatsapp {
-    left: 20px;
-  }
+
   
   .floating-chat {
     right: 20px;
@@ -777,5 +984,34 @@
   
   .collage-image-wrapper.sub {
     border-radius: 16px;
+  }
+}
+
+/* RESPONSIVE FOR SERVICES */
+@media (max-width: 992px) {
+  .services-section {
+    padding: 80px 5%;
+  }
+
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 45px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-heading {
+    font-size: 32px;
   }
 }

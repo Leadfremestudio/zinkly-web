@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import Lenis from 'lenis';
 import slide1 from './assets/slide1.png';
 import slide2 from './assets/slide2.png';
 import slide3 from './assets/slide3.png';
@@ -8,7 +9,10 @@ import './App.css';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [cursorText, setCursorText] = useState("");
+  const [isCursorActive, setIsCursorActive] = useState(false);
   const autoplayTimer = useRef(null);
+  const cursorRef = useRef(null);
 
   const slides = [
     {
@@ -18,12 +22,9 @@ function App() {
       title: (
         <>
           Trusted{' '}
-          <span className="title-accent-wrapper">
-            <span className="accent-green-dot"></span>
-            <span className="accent-green-symbol">T</span>
-            r
+          <span className="accent-word">
+            <span className="accent-green-char">T</span>ransformation
           </span>
-          ansformation
           <br />
           Partner
         </>
@@ -39,12 +40,10 @@ function App() {
         <>
           Cutting-Edge
           <br />
-          <span className="title-accent-wrapper">
-            <span className="accent-green-dot"></span>
-            <span className="accent-green-symbol">D</span>
-            i
-          </span>
-          gital Solutions
+          <span className="accent-word">
+            <span className="accent-green-char">D</span>igital
+          </span>{' '}
+          Solutions
         </>
       ),
       description: 'Empowering your business with high-performance architectures, premium tailored web portals, and frictionless user experiences.',
@@ -58,12 +57,10 @@ function App() {
         <>
           Cloud-Native
           <br />
-          <span className="title-accent-wrapper">
-            <span className="accent-green-dot"></span>
-            <span className="accent-green-symbol">A</span>
-            u
-          </span>
-          tomation Hub
+          <span className="accent-word">
+            <span className="accent-green-char">A</span>utomation
+          </span>{' '}
+          Hub
         </>
       ),
       description: 'Scale seamlessly with secure infrastructures, fast-loading cloud assets, and high-conversion landing pages built for growth.',
@@ -95,6 +92,97 @@ function App() {
   useEffect(() => {
     startAutoplay();
     return () => stopAutoplay();
+  }, []);
+
+  useEffect(() => {
+    let rafId;
+    const handleScroll = () => {
+      document.documentElement.style.setProperty('--scroll-y-raw', window.scrollY.toString());
+      rafId = null;
+    };
+
+    const onScroll = () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(handleScroll);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  useEffect(() => {
+    const isMobileOrTouch = window.innerWidth <= 1024 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (isMobileOrTouch) return;
+
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+    let rafId;
+    const tick = () => {
+      currentX += (mouseX - currentX) * 0.15;
+      currentY += (mouseY - currentY) * 0.15;
+      if (cursor) {
+        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  useEffect(() => {
+    // 1. Check user accessibility preference for reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // 2. Bypass on mobile & touch screens to eliminate touch-lag and keep native hardware-optimized inertia scroll
+    const isMobileOrTouch = window.innerWidth <= 1024 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (isMobileOrTouch) return;
+
+    // 3. Initialize lightweight, extremely smooth Lenis scrolling on desktop
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      infinite: false,
+    });
+
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, []);
 
   const handleIndicatorClick = (index) => {
@@ -145,11 +233,13 @@ function App() {
             className={`slide ${idx === currentSlide ? 'active' : ''}`}
             aria-hidden={idx !== currentSlide}
           >
-            {/* High Definition Ken Burns slide background */}
-            <div
-              className="slide-bg"
-              style={{ backgroundImage: `url(${slide.bg})` }}
-            />
+            {/* High Definition Ken Burns slide background with parallax container */}
+            <div className="slide-bg-parallax">
+              <div
+                className="slide-bg"
+                style={{ backgroundImage: `url(${slide.bg})` }}
+              />
+            </div>
             {/* Glowing neon overlays */}
             <div className="slide-overlay" />
 
@@ -230,22 +320,164 @@ function App() {
         </div>
       </section>
 
-      {/* Floating Action Badge - WhatsApp (Bottom Left) */}
-      <a
-        href="https://wa.me/yourwhatsappnumber"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="floating-btn floating-whatsapp"
-        aria-label="Contact us on WhatsApp"
-        id="whatsapp-widget"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.528 2.023 14.067.99 11.457.99 6.021.99 1.597 5.36 1.593 10.79c-.001 1.745.486 3.447 1.411 4.951L2.04 21.084l5.607-1.468-.999-.472-.001-.008z" />
-          <path d="M17.486 14.4c-.3-.149-1.776-.874-2.05-.974-.275-.099-.475-.149-.675.15-.2.299-.775.974-.95 1.173-.175.199-.35.224-.65.075-.3-.15-1.267-.467-2.413-1.487-.893-.794-1.496-1.77-1.671-2.07-.175-.299-.019-.461.13-.61.135-.133.3-.349.45-.523.15-.174.2-.299.3-.499.1-.2.05-.375-.025-.524-.075-.15-.675-1.623-.925-2.224-.244-.587-.493-.508-.675-.518-.175-.01-.375-.01-.575-.01-.2 0-.525.075-.8.374-.275.299-1.05 1.024-1.05 2.497 0 1.471 1.075 2.893 1.225 3.093.15.199 2.115 3.227 5.125 4.525.715.309 1.275.493 1.713.632.719.228 1.375.196 1.893.118.577-.087 1.777-.724 2.025-1.396.248-.672.248-1.246.173-1.396-.074-.15-.274-.249-.574-.397z" />
-        </svg>
-      </a>
+      {/* Services Section */}
+      <section id="services" className="services-section">
+        <div className="services-header">
+          <div className="services-header-left">
+            <span className="services-badge">What We Do</span>
+            <h2 className="services-heading">Perfect Solution For Your Business</h2>
+          </div>
+          <div className="services-header-right">
+            <a href="#services" className="view-all-btn">
+              View All
+            </a>
+          </div>
+        </div>
 
-      {/* Floating Action Badge - Instant Chat (Bottom Right) */}
+        <div className="services-grid">
+          {/* Card 1: Website Development */}
+          <div 
+            className="service-card" 
+            id="service-web"
+            onMouseEnter={() => {
+              setCursorText("Web");
+              setIsCursorActive(true);
+            }}
+            onMouseLeave={() => {
+              setIsCursorActive(false);
+            }}
+          >
+            <div className="service-icon-wrapper">
+              <div className="circle-icon pink-bg">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-8-3l-3-3 3-3 1.4 1.4-1.6 1.6 1.6 1.6L12 15zm4-3l-3 3-1.4-1.4 1.6-1.6-1.6-1.6L16 12z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 className="service-card-title">Website Development</h3>
+            <p className="service-card-desc">
+              Zinkly is a top quality web development company aimed at creating a better brand impression and user-friendly interface for your website.
+            </p>
+            <div className="service-tech-logos">
+              <div className="tech-item" title="WordPress">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12.158 12.786l-2.698 7.84a9.755 9.755 0 01-4.762-2.124l4.242-11.666 3.218 5.95zm3.626.353l-2.029-5.918h.078c1.09 0 1.954-.878 1.954-1.953 0-.74-.467-1.363-1.13-1.637a9.742 9.742 0 015.35 4.316l-4.223 5.192zm-3.666-9.01a1.218 1.218 0 011.22 1.22c0 .546-.35 1.01-.842 1.17L10.373 11.23 7.822 4.13zm6.657 12.164a9.73 9.73 0 01-5.748 3.522l3.435-9.972 2.313 6.45zm3.031-4.218l.194-.582a9.771 9.771 0 01-1.077 7.781l.883-7.199zm-9.806 8.163a9.789 9.789 0 01-7.234-8.816l4.498 12.338a9.71 9.71 0 012.736-3.522zm-7.66-9.822a9.745 9.745 0 016.924-3.136l-4.143 11.385a9.728 9.728 0 01-2.781-8.25zM12 0a12 12 0 1012 12A12.013 12.013 0 0012 0z"/>
+                </svg>
+              </div>
+              <div className="tech-item" title="Strapi">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{ marginRight: '4px' }}>
+                  <path d="M12 2L2 22h20L12 2zm0 3.99L18.01 18H5.99L12 5.99zM11 14h2v2h-2v-2zm0-5h2v3h-2V9z"/>
+                </svg>
+                <span style={{ fontSize: '11px', fontWeight: '700' }}>strapi</span>
+              </div>
+              <div className="tech-item" title="Layout Blocks">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{ marginRight: '4px' }}>
+                  <path d="M4 4h7v7H4zm9 0h7v7h-7zm0 9h7v7h-7zm-9 0h7v7H4z"/>
+                </svg>
+                <span style={{ fontSize: '11px', fontWeight: '700' }}>blocks</span>
+              </div>
+              <div className="tech-item" title="Node.js">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{ marginRight: '4px' }}>
+                  <path d="M12 2L2 7.77v11.54L12 22l10-4.69V7.77L12 2zm8 16.27l-8 3.75-8-3.75V8.93l8-3.75 8 3.75v9.34z"/>
+                </svg>
+                <span style={{ fontSize: '11px', fontWeight: '700' }}>node</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Application Development */}
+          <div 
+            className="service-card" 
+            id="service-app"
+            onMouseEnter={() => {
+              setCursorText("App");
+              setIsCursorActive(true);
+            }}
+            onMouseLeave={() => {
+              setIsCursorActive(false);
+            }}
+          >
+            <div className="service-icon-wrapper">
+              <div className="circle-icon blue-bg">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="currentColor" d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zM16 8H8v2h8V8zm0 3H8v2h8v-2z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 className="service-card-title">Application Development</h3>
+            <p className="service-card-desc">
+              We develop successful data-driven strategies to deal with the different mobile and enterprise application challenges.
+            </p>
+            <div className="service-tech-logos">
+              <div className="tech-item" title="Shopify">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M18.8 6.4L17 2H7L5.2 6.4C4.5 7.1 4 8 4 9v11c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V9c0-1-.5-1.9-1.2-2.6zM12 4c1.1 0 2 .9 2 2H10c0-1.1.9-2 2-2z"/>
+                </svg>
+              </div>
+              <div className="tech-item" title="WooCommerce" style={{ gap: '2px' }}>
+                <span style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.05em' }}>Woo</span>
+              </div>
+              <div className="tech-item" title="CS-Cart">
+                <span style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.02em' }}>cs cart</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Automation */}
+          <div 
+            className="service-card" 
+            id="service-auto"
+            onMouseEnter={() => {
+              setCursorText("Auto");
+              setIsCursorActive(true);
+            }}
+            onMouseLeave={() => {
+              setIsCursorActive(false);
+            }}
+          >
+            <div className="service-icon-wrapper">
+              <div className="circle-icon green-bg">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 className="service-card-title">Automation</h3>
+            <p className="service-card-desc">
+              Using the latest technology, our custom automation services deliver seamless efficiency and streamline your workflows.
+            </p>
+            <div className="service-tech-logos">
+              <div className="tech-item" title="Android">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{ marginRight: '4px' }}>
+                  <path d="M6 18c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1s1-.45 1-1v-3h2v3c0 .55.45 1 1 1s1-.45 1-1v-3h1c.55 0 1-.45 1-1V8H6v10zM12 2c-2.45 0-4.5 1.76-4.93 4h9.86c-.43-2.24-2.48-4-4.93-4zm7.25 4.25c-.39-.39-1.02-.39-1.41 0L16.2 7.9c.73.57 1.33 1.29 1.76 2.1l1.29-1.29c.39-.39.39-1.03 0-1.41zM6.22 7.9L4.58 6.25c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41L4.8 9.3c.43-.81 1.03-1.53 1.76-2.1z"/>
+                </svg>
+                <span style={{ fontSize: '10px', fontWeight: '700' }}>android</span>
+              </div>
+              <div className="tech-item" title="iOS/Apple">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.2.67-2.92 1.5-.63.73-1.18 1.87-1.03 2.98 1.1.09 2.22-.55 2.96-1.42z"/>
+                </svg>
+              </div>
+              <div className="tech-item" title="Flutter">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ marginRight: '4px' }}>
+                  <path d="M14.314 0L2.3 12l3.6 3.6 12.015-12.015h-3.601zm3.599 7.185L12 13.072l3.602 3.601 5.998-6.002h-3.587v-.101zM12 13.072L8.398 16.67l3.602 3.601 8-8h-3.601l-4.399.801z"/>
+                </svg>
+                <span style={{ fontSize: '11px', fontWeight: '700' }}>flutter</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Cursor Follower Bubble */}
+      <div 
+        ref={cursorRef} 
+        className={`custom-cursor-follower ${isCursorActive ? 'active' : ''}`}
+      >
+        <div className={`cursor-bubble ${isCursorActive ? 'active' : ''}`}>
+          <span className="cursor-text">{cursorText}</span>
+        </div>
+      </div>
       <button
         type="button"
         className="floating-btn floating-chat"
