@@ -1,16 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
 import slide1 from './assets/slide1.png';
 import slide2 from './assets/slide2.png';
 import slide3 from './assets/slide3.png';
 import aboutOfficeMain from './assets/about_office_main.png';
 import aboutOfficeSub from './assets/about_office_sub.png';
+import casePreviewDefault from './assets/case_preview_default.png';
+import caseKnowbest from './assets/case_knowbest.png';
+import caseInfiny from './assets/case_infiny.png';
+import caseAcadome from './assets/case_acadome.png';
+import caseEvergreen from './assets/case_evergreen.png';
 import './App.css';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cursorText, setCursorText] = useState("");
   const [isCursorActive, setIsCursorActive] = useState(false);
+  const [isCursorDark, setIsCursorDark] = useState(false);
   const autoplayTimer = useRef(null);
   const cursorRef = useRef(null);
 
@@ -75,24 +81,83 @@ function App() {
     { num: '1000', label: 'Completed Projects' }
   ];
 
+  const caseStudies = [
+    {
+      id: 0,
+      client: 'Knowbest Global',
+      category: 'Global Education',
+      title: 'Your Future Abroad Starts with the Right Guidance',
+      description: 'Engineered an immersive global education gateway connecting students with over 1,000 top-tier universities worldwide via automated digital guidance pipelines.',
+      kpi: '1,000+',
+      kpiLabel: 'Partner Universities',
+      tags: ['React', 'Node.js', 'Tailwind', 'AWS'],
+      gridClass: 'case-wide',
+      url: 'https://knowbestglobal.com',
+      address: 'knowbestglobal.com',
+      previewImage: caseKnowbest
+    },
+    {
+      id: 1,
+      client: 'Infiny Transit',
+      category: 'Transit & Travel',
+      title: 'Reliable Travel. Comfortable Journeys.',
+      description: 'Developed an automated booking and scheduling ecosystem for premium taxi and transit fleets, streamlining vehicle dispatch networks and passenger flows.',
+      kpi: '99.9%',
+      kpiLabel: 'Booking Success Rate',
+      tags: ['React', 'Express', 'MongoDB', 'Maps API'],
+      gridClass: 'case-standard',
+      url: 'https://infinytransit.com',
+      address: 'infinytransit.com',
+      previewImage: caseInfiny
+    },
+    {
+      id: 2,
+      client: 'Acadome',
+      category: 'Financial Training',
+      title: 'Empowering Individuals with Financial Management Skills',
+      description: 'Constructed an intensive, practical finance training portal with automated course tracks and professional career pathways for job-ready recruits.',
+      kpi: '95%',
+      kpiLabel: 'Career Placement',
+      tags: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
+      gridClass: 'case-standard',
+      url: 'https://acadome.in',
+      address: 'acadome.in',
+      previewImage: caseAcadome
+    },
+    {
+      id: 3,
+      client: 'EverGreen',
+      category: 'Premium Real Estate',
+      title: 'Build Your Future, One Property at a Time.',
+      description: 'Architected a highly responsive real estate presentation and listing search portal, featuring premium glassmorphic property filter panels and automated scheduling blocks.',
+      kpi: '3.5x',
+      kpiLabel: 'Lead Generation Speed',
+      tags: ['React', 'Three.js', 'Firebase', 'Node.js'],
+      gridClass: 'case-wide',
+      url: 'https://evergreenestates.com',
+      address: 'evergreenestates.com',
+      previewImage: caseEvergreen
+    }
+  ];
+
   // Reset autoplay timer whenever the active slide changes
-  const startAutoplay = () => {
+  const stopAutoplay = useCallback(() => {
+    if (autoplayTimer.current) {
+      clearInterval(autoplayTimer.current);
+    }
+  }, []);
+
+  const startAutoplay = useCallback(() => {
     stopAutoplay();
     autoplayTimer.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000); // Transition slide every 6 seconds
-  };
-
-  const stopAutoplay = () => {
-    if (autoplayTimer.current) {
-      clearInterval(autoplayTimer.current);
-    }
-  };
+  }, [stopAutoplay, slides.length]);
 
   useEffect(() => {
     startAutoplay();
     return () => stopAutoplay();
-  }, []);
+  }, [startAutoplay, stopAutoplay]);
 
   useEffect(() => {
     let rafId;
@@ -131,9 +196,40 @@ function App() {
     const onMouseMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (cursor) {
+        cursor.style.opacity = '1';
+      }
+    };
+
+    const onMouseOver = (e) => {
+      const target = e.target.closest('button:not(.indicator-btn), .learn-more-btn, .view-all-btn, .view-all-projects-btn, .case-arrow-btn, .floating-btn');
+      const navLink = e.target.closest('.nav-link, .indicator-btn');
+      if (target) {
+        cursor.classList.add('hovering-btn');
+      } else if (navLink) {
+        cursor.classList.add('hovering-nav');
+      }
+    };
+
+    const onMouseOut = (e) => {
+      const target = e.target.closest('button:not(.indicator-btn), .learn-more-btn, .view-all-btn, .view-all-projects-btn, .case-arrow-btn, .floating-btn');
+      const navLink = e.target.closest('.nav-link, .indicator-btn');
+      if (target) {
+        const relatedTarget = e.relatedTarget;
+        if (!relatedTarget || !target.contains(relatedTarget)) {
+          cursor.classList.remove('hovering-btn');
+        }
+      } else if (navLink) {
+        const relatedTarget = e.relatedTarget;
+        if (!relatedTarget || !navLink.contains(relatedTarget)) {
+          cursor.classList.remove('hovering-nav');
+        }
+      }
     };
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseover', onMouseOver, { passive: true });
+    document.addEventListener('mouseout', onMouseOut, { passive: true });
 
     let rafId;
     const tick = () => {
@@ -148,6 +244,8 @@ function App() {
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
@@ -342,9 +440,11 @@ function App() {
             onMouseEnter={() => {
               setCursorText("Web");
               setIsCursorActive(true);
+              setIsCursorDark(true);
             }}
             onMouseLeave={() => {
               setIsCursorActive(false);
+              setIsCursorDark(false);
             }}
           >
             <div className="service-icon-wrapper">
@@ -392,9 +492,11 @@ function App() {
             onMouseEnter={() => {
               setCursorText("App");
               setIsCursorActive(true);
+              setIsCursorDark(true);
             }}
             onMouseLeave={() => {
               setIsCursorActive(false);
+              setIsCursorDark(false);
             }}
           >
             <div className="service-icon-wrapper">
@@ -430,9 +532,11 @@ function App() {
             onMouseEnter={() => {
               setCursorText("Auto");
               setIsCursorActive(true);
+              setIsCursorDark(true);
             }}
             onMouseLeave={() => {
               setIsCursorActive(false);
+              setIsCursorDark(false);
             }}
           >
             <div className="service-icon-wrapper">
@@ -469,10 +573,85 @@ function App() {
         </div>
       </section>
 
-      {/* Custom Cursor Follower Bubble */}
+      {/* Case Studies Highlight Section */}
+      <section id="projects" className="projects-section">
+        <div className="projects-header">
+          <div className="projects-header-left">
+            <span className="projects-badge">Our Impact</span>
+            <h2 className="projects-heading">Engineered Success: Flagship Projects</h2>
+          </div>
+          <div className="projects-header-right">
+            <a href="#projects" className="view-all-projects-btn">
+              Explore Portfolio
+            </a>
+          </div>
+        </div>
+
+        <div className="bento-projects-grid">
+          {caseStudies.map((project) => (
+            <a
+              key={project.id}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`bento-case-card ${project.gridClass}`}
+              onMouseEnter={() => {
+                setCursorText("Visit Site");
+                setIsCursorActive(true);
+              }}
+              onMouseLeave={() => {
+                setIsCursorActive(false);
+              }}
+            >
+              <div className="case-card-overlay" />
+              <div className="case-card-glow" />
+              
+              <div 
+                className="case-card-hover-bg" 
+                style={{ backgroundImage: `url(${project.previewImage || casePreviewDefault})` }} 
+              />
+              
+              <div className="case-card-main-layout">
+                <div className="case-card-details-col">
+                  <div className="case-card-header">
+                    <div className="case-header-left">
+                      <span className="case-client">{project.client}</span>
+                      <span className="case-category">{project.category}</span>
+                    </div>
+                    <div className="case-kpi-badge">
+                      <span className="case-kpi-value">{project.kpi}</span>
+                      <span className="case-kpi-title">{project.kpiLabel}</span>
+                    </div>
+                  </div>
+
+                  <div className="case-card-body">
+                    <h3 className="case-title">{project.title}</h3>
+                    <p className="case-desc">{project.description}</p>
+                  </div>
+
+                  <div className="case-card-footer">
+                    <div className="case-tags">
+                      {project.tags.map((tag, tIdx) => (
+                        <span key={tIdx} className="case-tag-pill">{tag}</span>
+                      ))}
+                    </div>
+                    <div className="case-arrow-btn">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <div 
         ref={cursorRef} 
-        className={`custom-cursor-follower ${isCursorActive ? 'active' : ''}`}
+        className={`custom-cursor-follower ${isCursorActive ? 'active' : ''} ${isCursorDark ? 'dark-text' : ''}`}
       >
         <div className={`cursor-bubble ${isCursorActive ? 'active' : ''}`}>
           <span className="cursor-text">{cursorText}</span>

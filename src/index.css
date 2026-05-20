@@ -19,6 +19,7 @@
   /* Shadows & Layout */
   --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
   --shadow-glow: 0 0 25px rgba(19, 181, 92, 0.35);
+  --button-radius: 8px;
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
 }
@@ -64,7 +65,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: #1f2433;
-  border-radius: 5px;
+  border-radius: var(--button-radius);
   border: 2px solid var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb:hover {
