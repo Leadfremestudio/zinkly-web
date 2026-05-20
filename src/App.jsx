@@ -1,19 +1,48 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
+
+// Global Layout Components
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import CaseStudies from './components/CaseStudies';
+import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import FloatingChat from './components/FloatingChat';
+
+// Multi-Page shells
+import Home from './pages/Home';
+import About from './pages/About';
+import ServicesPage from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
+import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
+import Solutions from './pages/Solutions';
+import Insights from './pages/Insights';
+import InsightDetail from './pages/InsightDetail';
+import Contact from './pages/Contact';
+
 import './App.css';
+
+// Dynamic scroll reset tool executing on route pathname shift
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    // Also reset Lenis scroll position instantly if Lenis is active globally
+    const lenisEvent = new CustomEvent('lenis-reset-scroll');
+    window.dispatchEvent(lenisEvent);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const [cursorText, setCursorText] = useState("");
   const [isCursorActive, setIsCursorActive] = useState(false);
   const [isCursorDark, setIsCursorDark] = useState(false);
 
-  // 1. Core scroll offset tracker for CSS scroll-linked calculations
+  // 1. Core scroll raw coordinates tracker for CSS variables
   useEffect(() => {
     let rafId;
     const handleScroll = () => {
@@ -36,13 +65,11 @@ function App() {
     };
   }, []);
 
-  // 2. High-performance Lenis inertia smooth scroll on desktop viewports
+  // 2. Premium Lenis smooth scroll binds
   useEffect(() => {
-    // Check user accessibility preference for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    // Bypass on touch screens to eliminate touch lag
     const isMobileOrTouch = window.innerWidth <= 1024 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     if (isMobileOrTouch) return;
 
@@ -63,55 +90,71 @@ function App() {
     }
     rafId = requestAnimationFrame(raf);
 
+    // Event listener to reset Lenis scroll instantly upon route transition
+    const handleResetScroll = () => {
+      lenis.scrollTo(0, { immediate: true });
+    };
+    window.addEventListener('lenis-reset-scroll', handleResetScroll);
+
     return () => {
       cancelAnimationFrame(rafId);
+      window.removeEventListener('lenis-reset-scroll', handleResetScroll);
       lenis.destroy();
     };
   }, []);
 
   return (
-    <>
-      {/* Immersive Glassmorphic Header Navbar */}
+    <BrowserRouter>
+      {/* Route scroll position orchestrator */}
+      <ScrollToTop />
+
+      {/* Global Navigation Glassmorphic Header */}
       <Header />
 
-      {/* Main Premium Banner Carousel */}
-      <Hero />
+      {/* Primary Routing Shells */}
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <Home 
+              setCursorText={setCursorText} 
+              setIsCursorActive={setIsCursorActive} 
+              setIsCursorDark={setIsCursorDark} 
+            />
+          } 
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/:serviceId" element={<ServiceDetail />} />
+        <Route 
+          path="/projects" 
+          element={
+            <Projects 
+              setCursorText={setCursorText} 
+              setIsCursorActive={setIsCursorActive} 
+            />
+          } 
+        />
+        <Route path="/projects/:id" element={<ProjectDetail />} />
+        <Route path="/solutions" element={<Solutions />} />
+        <Route path="/insights" element={<Insights />} />
+        <Route path="/insights/:articleId" element={<InsightDetail />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
 
-      {/* About Us Collage and Copy Section */}
-      <About />
+      {/* Global Rich Conversion Footer */}
+      <Footer />
 
-      {/* Reusable Services Grid */}
-      <Services 
-        setCursorText={setCursorText} 
-        setIsCursorActive={setIsCursorActive} 
-        setIsCursorDark={setIsCursorDark} 
-      />
-
-      {/* Flagship Case Studies Bento Grid */}
-      <CaseStudies 
-        setCursorText={setCursorText} 
-        setIsCursorActive={setIsCursorActive} 
-      />
-
-      {/* Custom Follower Cursor Bubble */}
+      {/* Interactive Coordinate Mouse Cursor Follower */}
       <CustomCursor 
         cursorText={cursorText} 
         isActive={isCursorActive} 
         isDark={isCursorDark} 
       />
 
-      {/* Floating Chat Support Widget */}
-      <button
-        type="button"
-        className="floating-btn floating-chat"
-        aria-label="Open support chat"
-        id="chat-widget"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
-        </svg>
-      </button>
-    </>
+      {/* Premium Glassmorphic Support Chat Concierge */}
+      <FloatingChat />
+    </BrowserRouter>
   );
 }
 

@@ -1,32 +1,78 @@
-
+import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
-    <header className="app-header">
-      <a href="/" className="logo-container" aria-label="Zinkly Home">
+    <header className={`app-header ${menuOpen ? 'menu-expanded' : ''}`}>
+      <Link to="/" className="logo-container" aria-label="Zinkly Home" onClick={closeMenu}>
         <div className="logo-main">
           <span className="logo-web">zink</span>
           <span className="logo-castle">ly</span>
         </div>
         <span className="logo-subtext">Think • Build • Connect</span>
-      </a>
+      </Link>
 
-      <nav className="nav-container" aria-label="Main Navigation">
+      <nav className={`nav-container ${menuOpen ? 'active' : ''}`} aria-label="Main Navigation">
         <ul className="nav-list">
-          <li><a href="#home" className="nav-link active">Home</a></li>
-          <li><a href="#about" className="nav-link">About Us</a></li>
-          <li><a href="#services" className="nav-link">Services</a></li>
-          <li><a href="#projects" className="nav-link">Projects</a></li>
-          <li><a href="#solutions" className="nav-link">Solutions</a></li>
-          <li><a href="#contact" className="nav-link">Contact</a></li>
+          <li>
+            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end onClick={closeMenu}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              About Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/services" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              Services
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/projects" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              Projects
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/solutions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              Solutions
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/insights" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              Insights
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              Contact
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
       <div className="header-actions">
-        <button type="button" className="talk-button" id="lets-talk-btn">
+        <Link to="/contact" className="talk-button" id="lets-talk-btn" onClick={closeMenu}>
           Let's Talk
-        </button>
-        <button type="button" className="menu-burger" aria-label="Open Menu" id="drawer-toggle">
+        </Link>
+        <button
+          type="button"
+          className={`menu-burger ${menuOpen ? 'open-state' : ''}`}
+          aria-label={menuOpen ? 'Close Menu' : 'Open Menu'}
+          onClick={toggleMenu}
+          id="drawer-toggle"
+        >
           <span className="burger-line"></span>
           <span className="burger-line short"></span>
           <span className="burger-line"></span>
