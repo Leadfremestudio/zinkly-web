@@ -166,20 +166,6 @@ export const caseStudiesData = [
     image: caseInfiny
   },
   {
-    id: 2,
-    client: 'Acadome',
-    category: 'Financial Training',
-    title: 'Empowering Individuals with Financial Management Skills',
-    description: 'Constructed an intensive, practical finance training portal with automated course tracks and professional career pathways for job-ready recruits.',
-    kpi: '95%',
-    kpiLabel: 'Career Placement',
-    tags: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
-    gridClass: 'case-standard',
-    url: 'https://acadome.in',
-    address: 'acadome.in',
-    image: caseAcadome
-  },
-  {
     id: 3,
     client: 'EverGreen',
     category: 'Premium Real Estate',
@@ -188,10 +174,24 @@ export const caseStudiesData = [
     kpi: '3.5x',
     kpiLabel: 'Lead Generation Speed',
     tags: ['React', 'Three.js', 'Firebase', 'Node.js'],
-    gridClass: 'case-wide',
+    gridClass: 'case-standard',
     url: 'https://evergreenestates.com',
     address: 'evergreenestates.com',
     image: caseEvergreen
+  },
+  {
+    id: 2,
+    client: 'Acadome',
+    category: 'Financial Training',
+    title: 'Empowering Individuals with Financial Management Skills',
+    description: 'Constructed an intensive, practical finance training portal with automated course tracks and professional career pathways for job-ready recruits.',
+    kpi: '95%',
+    kpiLabel: 'Career Placement',
+    tags: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
+    gridClass: 'case-wide',
+    url: 'https://acadome.in',
+    address: 'acadome.in',
+    image: caseAcadome
   }
 ];
 
@@ -321,6 +321,24 @@ export const detailedCaseStudies = {
     }
   },
   '2': {
+    client: 'EverGreen',
+    title: 'Premium Real Estate Engine',
+    subtitle: 'Stunning property filtering and interactive presentation systems.',
+    bgImage: caseEvergreen,
+    challenge: 'EverGreen\'s high-end property portal was slow, failing to show the high-fidelity premium luxury of their properties, causing potential high-budget buyers to bounce within 5 seconds.',
+    solution: 'We built a high-fidelity glassmorphic real estate catalog utilizing dynamic 3D asset loaders (Three.js) and optimized image-render tracks. We integrated automated booking forms for virtual real estate tours.',
+    metrics: [
+      { value: '3.5x', label: 'Lead Generation Speed' },
+      { value: '1.2s', label: 'Page Load Speed' },
+      { value: '$45M+', label: 'Property Sales Value' }
+    ],
+    techStackUsed: ['React', 'Three.js', 'Firebase Auth', 'Tailwind CSS', 'Cloudflare CDN'],
+    quote: {
+      text: "The visual presentation is stunning. Potential buyers are wowed by the glassmorphism and fluid animations from their very first visit.",
+      author: "Rajesh Singhania, VP of Sales at EverGreen"
+    }
+  },
+  '3': {
     client: 'Acadome',
     title: 'Intensive Financial Training Portals',
     subtitle: 'Practical finance modeling and simulated career tracks for recruits.',
@@ -338,24 +356,7 @@ export const detailedCaseStudies = {
       author: "Dr. Elena Rostova, Academic Dean at Acadome"
     }
   },
-  '3': {
-    client: 'EverGreen',
-    title: 'Premium Real Estate Engine',
-    subtitle: 'Stunning property filtering and interactive presentation systems.',
-    bgImage: caseEvergreen,
-    challenge: 'EverGreen\'s high-end property portal was slow, failing to show the high-fidelity premium luxury of their properties, causing potential high-budget buyers to bounce within 5 seconds.',
-    solution: 'We built a high-fidelity glassmorphic real estate catalog utilizing dynamic 3D asset loaders (Three.js) and optimized image-render tracks. We integrated automated booking forms for virtual real estate tours.',
-    metrics: [
-      { value: '3.5x', label: 'Lead Generation Speed' },
-      { value: '1.2s', label: 'Page Load Speed' },
-      { value: '$45M+', label: 'Property Sales Value' }
-    ],
-    techStackUsed: ['React', 'Three.js', 'Firebase Auth', 'Tailwind CSS', 'Cloudflare CDN'],
-    quote: {
-      text: "The visual presentation is stunning. Potential buyers are wowed by the glassmorphism and fluid animations from their very first visit.",
-      author: "Rajesh Singhania, VP of Sales at EverGreen"
-    }
-  }
+
 };
 
 // 9. Technical articles/blogs for '/insights' page

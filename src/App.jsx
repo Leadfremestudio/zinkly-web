@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 
 // Global Layout Components
@@ -36,6 +36,7 @@ function ScrollToTop() {
 
   return null;
 }
+
 
 function App() {
   const [cursorText, setCursorText] = useState("");
@@ -123,23 +124,20 @@ function App() {
             />
           } 
         />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/services/:serviceId" element={<ServiceDetail />} />
+        <Route path="/about" element={<Navigate to="/" replace />} />
+        <Route path="/services" element={<Navigate to="/" replace />} />
+        <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
         <Route 
           path="/projects" 
           element={
-            <Projects 
-              setCursorText={setCursorText} 
-              setIsCursorActive={setIsCursorActive} 
-            />
+            <Navigate to="/" replace />
           } 
         />
-        <Route path="/projects/:id" element={<ProjectDetail />} />
-        <Route path="/solutions" element={<Solutions />} />
-        <Route path="/insights" element={<Insights />} />
-        <Route path="/insights/:articleId" element={<InsightDetail />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/projects/:id" element={<Navigate to="/" replace />} />
+        <Route path="/solutions" element={<Navigate to="/" replace />} />
+        <Route path="/insights" element={<Navigate to="/" replace />} />
+        <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
+        <Route path="/contact" element={<Navigate to="/" replace />} />
       </Routes>
 
       {/* Global Rich Conversion Footer */}

@@ -2,6 +2,10 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Services from '../components/Services';
 import CaseStudies from '../components/CaseStudies';
+import Technologies from '../components/Technologies';
+import Testimonials from '../components/ui/demo';
+import FAQSection from '../components/FAQSection';
+import CTASection from '../components/CTASection';
 import usePageMetadata from '../hooks/usePageMetadata';
 
 function Home({ setCursorText, setIsCursorActive, setIsCursorDark }) {
@@ -27,6 +31,18 @@ function Home({ setCursorText, setIsCursorActive, setIsCursorDark }) {
         setCursorText={setCursorText} 
         setIsCursorActive={setIsCursorActive} 
       />
+
+      {/* 5. Technologies Stack Pills Grid */}
+      <Technologies />
+
+      {/* 6. Malayalam Enterprise Testimonials Carousel */}
+      <Testimonials />
+
+      {/* 7. FAQ Accordion Grid Section */}
+      <FAQSection />
+
+      {/* 8. Call To Action Section */}
+      <CTASection />
     </main>
   );
 }
