@@ -8,7 +8,7 @@ function About() {
       <div className="about-bg-glow"></div>
 
       {/* Left Column: Overlapping Rounded Images */}
-      <div className="about-image-column">
+      <div className="about-image-column reveal reveal-left">
         <div className="about-collage">
           <div className="collage-image-wrapper main">
             <img src={aboutOfficeMain} alt="Zinkly Workspace - Think Build Connect" className="collage-image" />
@@ -20,7 +20,7 @@ function About() {
       </div>
 
       {/* Right Column: Reference Headline, Copy, and Pill Button */}
-      <div className="about-content">
+      <div className="about-content reveal reveal-right delay-200">
         <span className="about-badge">ABOUT US</span>
         <h2 className="about-heading">
           Empowering Businesses <br />

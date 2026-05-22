@@ -4,7 +4,7 @@ export default function CTASection() {
   return (
     <section className="cta-section-wrapper">
       <div className="cta-container">
-        <div className="cta-reference-card">
+        <div className="cta-reference-card reveal reveal-scale">
           {/* Subtle curved background lines patterns */}
           <div className="cta-bg-pattern-circle cta-pattern-1"></div>
           <div className="cta-bg-pattern-circle cta-pattern-2"></div>
@@ -47,7 +47,7 @@ export default function CTASection() {
           </div>
 
           {/* Main Card Content */}
-          <div className="cta-card-body-ref">
+          <div className="cta-card-body-ref reveal reveal-up delay-200">
 
             {/* Heading */}
             <h2 className="cta-card-title-ref">

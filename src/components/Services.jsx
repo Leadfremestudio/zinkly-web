@@ -45,7 +45,7 @@ const ServiceIcon = ({ id }) => {
 };
 
 // Reusable ServiceCard Sub-Component
-const ServiceCard = ({ card, setCursorText, setIsCursorActive, setIsCursorDark }) => {
+const ServiceCard = ({ card, index, setCursorText, setIsCursorActive, setIsCursorDark }) => {
   const getBubbleText = (id) => {
     if (id === 'service-web') return 'Web';
     if (id === 'service-app') return 'App';
@@ -66,9 +66,11 @@ const ServiceCard = ({ card, setCursorText, setIsCursorActive, setIsCursorDark }
           ? 'purple-bg'
           : 'green-bg';
 
+  const delayClass = `delay-${((index % 3) + 1) * 100}`;
+
   return (
     <div 
-      className="service-card" 
+      className={`service-card reveal reveal-up ${delayClass}`}
       id={card.id}
       onMouseEnter={() => {
         setCursorText(getBubbleText(card.id));
@@ -94,7 +96,7 @@ const ServiceCard = ({ card, setCursorText, setIsCursorActive, setIsCursorDark }
 function Services({ setCursorText, setIsCursorActive, setIsCursorDark }) {
   return (
     <section id="services" className="services-section">
-      <div className="services-header">
+      <div className="services-header reveal reveal-up">
         <div className="services-header-left">
           <span className="services-badge">What We Do</span>
           <h2 className="services-heading">Perfect Solution For Your Business</h2>
@@ -102,10 +104,11 @@ function Services({ setCursorText, setIsCursorActive, setIsCursorDark }) {
       </div>
 
       <div className="services-grid six-cards-grid">
-        {servicesData.map((card) => (
+        {servicesData.map((card, index) => (
           <ServiceCard
             key={card.id}
             card={card}
+            index={index}
             setCursorText={setCursorText}
             setIsCursorActive={setIsCursorActive}
             setIsCursorDark={setIsCursorDark}
