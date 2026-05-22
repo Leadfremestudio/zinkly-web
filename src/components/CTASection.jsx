@@ -62,7 +62,7 @@ export default function CTASection() {
             {/* Centered Button */}
             <div className="cta-button-wrapper-ref">
               <Link to="/contact" className="cta-pill-btn-ref">
-                <span className="cta-btn-text-ref">Book a Call</span>
+                <span className="cta-btn-text-ref">Contact Us Today</span>
                 <span className="cta-btn-arrow-ref">
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>

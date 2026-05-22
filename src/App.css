@@ -19,6 +19,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+  position: relative;
+  z-index: 101;
 }
 
 .logo-main {
@@ -47,51 +49,121 @@
   padding-left: 2px;
 }
 
-/* Glassmorphic Navbar */
+/* Scroll lock when mobile/desktop drawer is open */
+html.menu-open-scroll-lock,
+body.menu-open-scroll-lock {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+/* Glassmorphic Drawer Menu */
 .nav-container {
-  background: var(--glass-bg);
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--button-radius);
-  padding: 8px 32px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  width: 35%;
+  min-width: 380px;
+  height: 100vh;
+  background-color: rgba(6, 7, 11, 0.98);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  transition: var(--transition-smooth);
+  z-index: 95;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.6s;
+  padding: 160px 40px 80px 40px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-container.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
 }
 
 .nav-container:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
 }
 
 .nav-list {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   list-style: none;
-  gap: 28px;
+  gap: 32px;
+  width: 100%;
 }
 
 .nav-link {
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  padding: 8px 4px;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.75);
+  display: inline-block;
   position: relative;
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link:hover {
-  color: var(--text-main);
+  color: var(--primary-green);
+  transform: scale(1.05);
 }
 
 .nav-link.active {
-  color: var(--primary-green);
+  color: var(--primary-green) !important;
 }
+
+.nav-link::after {
+  display: none !important; /* Hide the underline hover effect */
+}
+
+/* Staggered entry animation for nav items */
+.nav-list li {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-container.active .nav-list li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered transition delays for each nav list item */
+.nav-container.active .nav-list li:nth-child(1) { transition-delay: 0.05s; }
+.nav-container.active .nav-list li:nth-child(2) { transition-delay: 0.1s; }
+.nav-container.active .nav-list li:nth-child(3) { transition-delay: 0.15s; }
+.nav-container.active .nav-list li:nth-child(4) { transition-delay: 0.2s; }
+.nav-container.active .nav-list li:nth-child(5) { transition-delay: 0.25s; }
+.nav-container.active .nav-list li:nth-child(6) { transition-delay: 0.3s; }
+.nav-container.active .nav-list li:nth-child(7) { transition-delay: 0.35s; }
+.nav-container.active .nav-list li:nth-child(8) { transition-delay: 0.4s; }
 
 /* Header Right Buttons */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 16px;
+  position: relative;
+  z-index: 101;
 }
 
 .talk-button {
@@ -164,7 +236,10 @@
   height: 2px;
   background-color: var(--primary-green);
   border-radius: 1px;
-  transition: var(--transition-fast);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease,
+              width 0.3s ease,
+              background-color 0.3s ease;
 }
 
 .menu-burger:hover .burger-line {
@@ -179,6 +254,27 @@
 
 .menu-burger:hover .burger-line.short {
   width: 18px;
+}
+
+/* Open state morphing animations */
+.menu-burger.open-state .burger-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+  background-color: #ffffff;
+}
+
+.menu-burger.open-state .burger-line.short {
+  opacity: 0;
+  transform: translateX(15px) scaleX(0);
+}
+
+.menu-burger.open-state .burger-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+  background-color: #ffffff;
+}
+
+/* Hide desktop specific styles inside mobile list items */
+.mobile-only-action {
+  display: none;
 }
 
 /* CAROUSEL BASE */
@@ -1002,7 +1098,31 @@
 
 @media (max-width: 992px) {
   .nav-container {
-    display: none; /* Hide navigation links on tablet/mobile */
+    width: 100%;
+    min-width: 100%;
+    border-left: none;
+    padding: 140px 24px 60px 24px;
+  }
+
+  .nav-link {
+    font-size: 28px;
+  }
+
+  .nav-list {
+    gap: 24px;
+  }
+
+  .mobile-only-action {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .mobile-talk-button {
+    font-size: 16px;
+    padding: 14px 44px;
+    display: inline-block;
   }
   
   .stats-grid {
@@ -2068,10 +2188,6 @@
 /* 1. Global Header Modifications */
 .app-header {
   transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.app-header.menu-expanded {
-  background-color: rgba(6, 7, 11, 0.98);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-link {
@@ -5759,7 +5875,7 @@
   background: #13b55c; /* Vibrant green primary action button */
   color: #ffffff;
   padding: 14px 44px;
-  border-radius: 50px;
+  border-radius: 14px;
   font-size: 15px;
   font-weight: 700;
   box-shadow: 0 10px 25px rgba(19, 181, 92, 0.2);
@@ -5885,3 +6001,11 @@
     padding: 14px 28px;
   }
 }
+
+/* Hide static Let's Talk button on smaller screens to prevent crowding */
+@media (max-width: 640px) {
+  .header-actions .talk-button:not(.mobile-talk-button) {
+    display: none;
+  }
+}
+

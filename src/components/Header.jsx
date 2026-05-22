@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 function Header() {
@@ -12,6 +12,20 @@ function Header() {
     setMenuOpen(false);
   };
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.documentElement.classList.add('menu-open-scroll-lock');
+      document.body.classList.add('menu-open-scroll-lock');
+    } else {
+      document.documentElement.classList.remove('menu-open-scroll-lock');
+      document.body.classList.remove('menu-open-scroll-lock');
+    }
+    return () => {
+      document.documentElement.classList.remove('menu-open-scroll-lock');
+      document.body.classList.remove('menu-open-scroll-lock');
+    };
+  }, [menuOpen]);
+
   return (
     <header className={`app-header ${menuOpen ? 'menu-expanded' : ''}`}>
       <Link to="/" className="logo-container" aria-label="Zinkly Home" onClick={closeMenu}>
@@ -22,7 +36,11 @@ function Header() {
         <span className="logo-subtext">Think • Build • Connect</span>
       </Link>
 
-      <nav className={`nav-container ${menuOpen ? 'active' : ''}`} aria-label="Main Navigation">
+      <nav 
+        className={`nav-container ${menuOpen ? 'active' : ''}`} 
+        aria-label="Main Navigation"
+        data-lenis-prevent
+      >
         <ul className="nav-list">
           <li>
             <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end onClick={closeMenu}>
@@ -58,6 +76,11 @@ function Header() {
             <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
               Contact
             </NavLink>
+          </li>
+          <li className="mobile-only-action">
+            <Link to="/contact" className="talk-button mobile-talk-button" onClick={closeMenu}>
+              Let's Talk
+            </Link>
           </li>
         </ul>
       </nav>
