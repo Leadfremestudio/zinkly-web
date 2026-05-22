@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import FloatingChat from './components/FloatingChat';
+import BackToTop from './components/BackToTop';
 
 // Multi-Page shells
 import Home from './pages/Home';
@@ -152,6 +153,9 @@ function App() {
 
       {/* Premium Glassmorphic Support Chat Concierge */}
       <FloatingChat />
+
+      {/* Premium Floating Back-to-Top Navigation */}
+      <BackToTop />
     </BrowserRouter>
   );
 }
