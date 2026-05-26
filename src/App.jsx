@@ -125,7 +125,16 @@ function App() {
             />
           } 
         />
-        <Route path="/about" element={<Navigate to="/" replace />} />
+        <Route 
+          path="/about" 
+          element={
+            <About 
+              setCursorText={setCursorText} 
+              setIsCursorActive={setIsCursorActive} 
+              setIsCursorDark={setIsCursorDark} 
+            />
+          } 
+        />
         <Route path="/services" element={<Navigate to="/" replace />} />
         <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
         <Route 

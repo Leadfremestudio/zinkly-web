@@ -1,173 +1,426 @@
-import { timelineData, leadershipData } from '../data';
+import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import usePageMetadata from '../hooks/usePageMetadata';
+import useScrollReveal from '../hooks/useScrollReveal';
+import './About.css';
 
-function About() {
-  usePageMetadata('About Us', 'Discover Zinkly\'s DNA, corporate engineering philosophies, growth timelines, and meets our technical leadership team.');
+
+
+// Crisp, high-end vector SVG brand logos for Logo Marquee Section
+const BrandLogos = {
+  TaskUs: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="m9 11 2 2 4-4"/>
+    </svg>
+  ),
+  Tasktop: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 8 8 12 12 16"/>
+      <line x1="16" y1="12" x2="8" y2="12"/>
+    </svg>
+  ),
+  Taskode: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <polyline points="16 18 22 12 16 6"/>
+      <polyline points="8 6 2 12 8 18"/>
+    </svg>
+  ),
+  Taskrabbit: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  ),
+  Smartcat: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+    </svg>
+  ),
+  Spherule: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <circle cx="12" cy="12" r="8"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  ),
+  Boltshift: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+  ),
+  Lightbox: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+      <line x1="9" y1="9" x2="15" y2="15"/>
+      <line x1="15" y1="9" x2="9" y2="15"/>
+    </svg>
+  ),
+  AcmeCorp: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+    </svg>
+  ),
+  Nietzsche: () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+  )
+};
+
+// Row 1 Brands
+const row1Brands = [
+  { name: 'TaskUs', Icon: BrandLogos.TaskUs },
+  { name: 'TASKTOP', Icon: BrandLogos.Tasktop },
+  { name: 'taskode', Icon: BrandLogos.Taskode },
+  { name: 'taskrabbit', Icon: BrandLogos.Taskrabbit }
+];
+
+// Row 2 Brands
+const row2Brands = [
+  { name: 'Smartcat', Icon: BrandLogos.Smartcat },
+  { name: 'Spherule', Icon: BrandLogos.Spherule },
+  { name: 'Boltshift', Icon: BrandLogos.Boltshift },
+  { name: 'Lightbox', Icon: BrandLogos.Lightbox },
+  { name: 'Acme Corp', Icon: BrandLogos.AcmeCorp },
+  { name: 'Nietzsche', Icon: BrandLogos.Nietzsche }
+];
+
+// High-performance, 60fps Count Up animation component triggered when scrolled into view
+function CountUpNumber({ end, prefix = "", suffix = "", duration = 2000 }) {
+  const [count, setCount] = useState(0);
+  const elementRef = useRef(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) {
+      setCount(end);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && !hasAnimated.current) {
+        hasAnimated.current = true;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          setCount(Math.floor(progress * end));
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            setCount(end);
+          }
+        };
+        window.requestAnimationFrame(step);
+        observer.unobserve(elementRef.current);
+      }
+    }, { threshold: 0.1 });
+
+    const currentEl = elementRef.current;
+    if (currentEl) {
+      observer.observe(currentEl);
+    }
+
+    return () => {
+      if (currentEl) observer.disconnect();
+    };
+  }, [end, duration]);
+
+  return <span ref={elementRef}>{prefix}{count}{suffix}</span>;
+}
+
+const rotatingWords = ['Enterprise', 'Software', 'Systems', 'Workflows', 'Business'];
+const extendedWords = [...rotatingWords, rotatingWords[0]];
+
+function RotatingText() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTransitionEnabled(true);
+      setCurrentIndex((prev) => prev + 1);
+    }, 2800);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleTransitionEnd = () => {
+    if (currentIndex >= rotatingWords.length) {
+      setTransitionEnabled(false);
+      setCurrentIndex(0);
+    }
+  };
+
+  return (
+    <span className="rotating-container">
+      <span
+        className="rotating-wheel"
+        style={{
+          transform: `translateY(-${currentIndex * (100 / extendedWords.length)}%)`,
+          transition: transitionEnabled ? 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)' : 'none'
+        }}
+        onTransitionEnd={handleTransitionEnd}
+      >
+        {extendedWords.map((word, idx) => {
+          const isActive = idx === currentIndex || (currentIndex >= rotatingWords.length && idx === 0);
+          return (
+            <span
+              key={idx}
+              className={`rotating-word ${isActive ? 'word-active' : ''}`}
+            >
+              {word}
+            </span>
+          );
+        })}
+      </span>
+    </span>
+  );
+}
+
+
+function About({ setCursorText, setIsCursorActive, setIsCursorDark }) {
+  // Toggle body class for black header styling
+  useEffect(() => {
+    document.body.classList.add('about-header-theme');
+    return () => {
+      document.body.classList.remove('about-header-theme');
+    };
+  }, []);
+
+  // SEO Meta-data binding
+  usePageMetadata('About Us | Zinkly', 'Discover how Zinkly fuels business transformation with advanced technology, custom web architectures, and seamless automation pipelines.');
+  
+  // Hardware-accelerated Scroll Reveal triggering
+  useScrollReveal();
+
+  const handleMouseEnterButton = () => {
+    if (setCursorText && setIsCursorActive) {
+      setCursorText("Talk");
+      setIsCursorActive(true);
+    }
+  };
+
+  const handleMouseLeaveButton = () => {
+    if (setIsCursorActive) {
+      setIsCursorActive(false);
+    }
+  };
 
   return (
     <div className="about-page-wrapper">
-      {/* 1. Hero Header Banner */}
-      <section className="page-hero-banner">
-        <div className="page-hero-glow"></div>
-        <div className="page-hero-content">
-          <span className="page-badge">OUR IDENTITY</span>
-          <h1 className="page-title">
-            Our DNA & <span className="accent-green">Mission</span>
-          </h1>
-          <p className="page-subtitle">
-            Think • Build • Connect. We engineer custom enterprise systems, headless web portals, and low-latency workflows designed to scale.
+      {/* Dynamic Background Glows (shifted down to keep hero pure white) */}
+      <div className="about-decor-glow mid-left" style={{ top: '65%' }}></div>
+
+      {/* 1. ABOUT US BANNER SECTION */}
+      <section className="about-banner-sec">
+        <h1 className="about-banner-title">
+          Scale Your <RotatingText /> <br /> with Ingenious Engineering
+        </h1>
+        <p className="about-banner-desc">
+          At Zinkly, we architect high-performance software systems, low-latency headless web portals, 
+          and custom cloud-native automation pipelines engineered to support global scale.
+        </p>
+      </section>
+
+      {/* 2. LOGO MARQUEE SECTION */}
+      <section className="logo-marquee-sec">
+        {/* Layer 1: Scrolling Left */}
+        <div className="logo-marquee-container">
+          <div className="logo-marquee-track track-left">
+            {[...Array(6)].flatMap(() => row1Brands).map((brand, idx) => {
+              const Icon = brand.Icon;
+              return (
+                <div key={`row1-${idx}`} className="logo-marquee-item">
+                  <span className="marquee-logo-icon">
+                    <Icon />
+                  </span>
+                  <span className="marquee-logo-name">{brand.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Layer 2: Scrolling Right */}
+        <div className="logo-marquee-container" style={{ marginTop: '24px' }}>
+          <div className="logo-marquee-track track-right">
+            {[...Array(4)].flatMap(() => row2Brands).map((brand, idx) => {
+              const Icon = brand.Icon;
+              return (
+                <div key={`row2-${idx}`} className="logo-marquee-item">
+                  <span className="marquee-logo-icon">
+                    <Icon />
+                  </span>
+                  <span className="marquee-logo-name">{brand.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. COUNT/STATS SECTION */}
+      <section className="about-count-sec reveal reveal-up">
+        <div className="count-sec-left">
+          <h2 className="count-sec-heading">
+            Empowering your <br />
+            success <span className="accent-muted">with our <br /> solutions</span>
+          </h2>
+        </div>
+
+        <div className="count-sec-right">
+          <div className="about-stat-card">
+            <div className="about-stat-num">
+              <CountUpNumber end={15} suffix="k" />
+            </div>
+            <div className="about-stat-label">Global Downloads</div>
+          </div>
+
+          <div className="about-stat-card">
+            <div className="about-stat-num">
+              <CountUpNumber end={20} prefix="$" suffix="M" />
+            </div>
+            <div className="about-stat-label">Return Investment</div>
+          </div>
+
+          <div className="about-stat-card">
+            <div className="about-stat-num">
+              <CountUpNumber end={200} suffix="+" />
+            </div>
+            <div className="about-stat-label">5-Star Reviews</div>
+          </div>
+
+          <div className="about-stat-card">
+            <div className="about-stat-num">
+              <CountUpNumber end={500} />
+            </div>
+            <div className="about-stat-label">Projects Completed</div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. ABOUT US DESCRIPTION SECTION */}
+      <section className="about-desc-sec reveal reveal-up">
+        <div className="about-desc-container">
+          <p className="about-desc-paragraph">
+            Struggling to stay organized, our users found the perfect solution with Zinkly. By simplifying task management and boosting team collaboration, they've achieved more in less time. <span className="text-fade-1">Join thousands </span><span className="text-fade-2">who've transformed chaos into productivity</span>
           </p>
         </div>
       </section>
 
-      {/* 2. Core Philosophy & Values */}
-      <section className="about-values-section">
-        <div className="section-title-block">
-          <span className="section-badge">FOUNDATIONS</span>
-          <h2 className="section-heading">Core Engineering Pillars</h2>
-        </div>
-        <div className="values-grid">
-          <div className="value-card">
-            <div className="value-icon-circle green">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
-              </svg>
-            </div>
-            <h3 className="value-title">Innovation</h3>
-            <p className="value-desc">Pioneering edge solutions, containerized microservices, and serverless automation frameworks to reduce operational friction.</p>
+      {/* 5. DETAILED SERVICES SECTION (6 Alternating Layouts) */}
+      <section className="detailed-services-sec">
+        
+        {/* Subsection 1: Web Development (Left Content, Right Image, White Background) */}
+        <div className="detailed-service-item reveal reveal-up">
+          <div className="service-item-content">
+            <span className="service-item-badge">Web Development</span>
+            <h2 className="service-item-title">
+              Bespoke Headless <br />
+              <span className="accent-green">Web Solutions</span>
+            </h2>
+            <p className="service-item-desc">
+              We design and engineer high-performance web systems tailored to your specific brand identity. By utilizing headless architectures, static site generation, and optimized content delivery networks, Zinkly guarantees lightning-fast loading speeds, superior SEO performance, and bulletproof security.
+            </p>
           </div>
-
-          <div className="value-card">
-            <div className="value-icon-circle pink">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
-              </svg>
-            </div>
-            <h3 className="value-title">Trust & SLAs</h3>
-            <p className="value-desc">Backing every project with robust, corporate-grade service agreements, 99.99% system uptime, and transparent database transfers.</p>
-          </div>
-
-          <div className="value-card">
-            <div className="value-icon-circle blue">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
-            <h3 className="value-title">Technical Quality</h3>
-            <p className="value-desc">Strict lint configurations, automated QA pipelines, zero-unused compilation variables, and highly reusable modular components.</p>
-          </div>
-
-          <div className="value-card">
-            <div className="value-icon-circle gold">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-              </svg>
-            </div>
-            <h3 className="value-title">Agile Alignment</h3>
-            <p className="value-desc">Deploying bi-weekly sprint intervals, daily standups, and direct access to senior dev leads to ensure complete alignment.</p>
+          <div className="service-item-image">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Zinkly Advanced Web Engineering and Headless Architectures" />
           </div>
         </div>
+
+        {/* Subsection 2: Application Development (Left Image, Right Content, Grey Background) */}
+        <div className="detailed-service-item bg-grey reveal reveal-up">
+          <div className="service-item-image">
+            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80" alt="Zinkly Mobile App Engineering & Enterprise SaaS Portals" />
+          </div>
+          <div className="service-item-content">
+            <span className="service-item-badge">App Development</span>
+            <h2 className="service-item-title">
+              High-Scale Mobile & <br />
+              <span className="accent-green">Enterprise Apps</span>
+            </h2>
+            <p className="service-item-desc">
+              From enterprise SaaS portals to consumer mobile apps, Zinkly engineers secure, data-driven systems optimized for cross-platform efficiency. We build responsive and responsive architectures using React Native, Flutter, and native frameworks to ensure top-notch performance.
+            </p>
+          </div>
+        </div>
+
+        {/* Subsection 3: Automation (Left Content, Right Image, White Background) */}
+        <div className="detailed-service-item reveal reveal-up">
+          <div className="service-item-content">
+            <span className="service-item-badge">Automation</span>
+            <h2 className="service-item-title">
+              Intelligent Pipeline & <br />
+              <span className="accent-green">Workflow Automation</span>
+            </h2>
+            <p className="service-item-desc">
+              Eliminate friction and human error. Zinkly designs advanced robotic process automations (RPA), custom database sync pipelines, and continuous integration triggers to automate your most critical business tasks, saving thousands of developer hours.
+            </p>
+          </div>
+          <div className="service-item-image">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="Zinkly Intelligent Automation pipelines and cloud syncs" />
+          </div>
+        </div>
+
+        {/* Subsection 4: IT Consultation (Left Image, Right Content, Grey Background) */}
+        <div className="detailed-service-item bg-grey reveal reveal-up">
+          <div className="service-item-image">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Zinkly IT Consultation, roadmap definitions, and technical planning" />
+          </div>
+          <div className="service-item-content">
+            <span className="service-item-badge">IT Consultation</span>
+            <h2 className="service-item-title">
+              Expert Strategic & <br />
+              <span className="accent-green">Technical Consultation</span>
+            </h2>
+            <p className="service-item-desc">
+              We define technical roadmaps, architectural strategies, cloud-native readiness, and secure compliance audits to align your software engineering stack with your global business objectives.
+            </p>
+          </div>
+        </div>
+
+        {/* Subsection 5: Digital Marketing (Left Content, Right Image, White Background) */}
+        <div className="detailed-service-item reveal reveal-up">
+          <div className="service-item-content">
+            <span className="service-item-badge">Digital Marketing</span>
+            <h2 className="service-item-title">
+              Data-Driven Campaigns & <br />
+              <span className="accent-green">Growth Marketing</span>
+            </h2>
+            <p className="service-item-desc">
+              Amplify your brand reach, drive high-intent conversion traffic, and dominate channels. Zinkly designs robust digital ad funnels, performance metrics analytics, and multi-channel campaigns.
+            </p>
+          </div>
+          <div className="service-item-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Zinkly Performance Marketing, Google Ads and conversion dashboards" />
+          </div>
+        </div>
+
+        {/* Subsection 6: Search Engine Optimization (Left Image, Right Content, Grey Background) */}
+        <div className="detailed-service-item bg-grey reveal reveal-up">
+          <div className="service-item-image">
+            <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&fit=crop&w=800&q=80" alt="Zinkly Search Engine Optimization, keyword ranking index metrics" />
+          </div>
+          <div className="service-item-content">
+            <span className="service-item-badge">SEO</span>
+            <h2 className="service-item-title">
+              Authority Architecture & <br />
+              <span className="accent-green">Search Ranking Domination</span>
+            </h2>
+            <p className="service-item-desc">
+              Capture search intent and scale organic traffic. We specialize in deep technical SEO audits, keyword gap architectures, Core Web Vitals optimization, and high-quality link-building programs.
+            </p>
+          </div>
+        </div>
+
       </section>
 
-      {/* 3. Interactive Growth Timeline */}
-      <section className="about-timeline-section">
-        <div className="section-title-block centered">
-          <span className="section-badge font-green">JOURNEY</span>
-          <h2 className="section-heading">How Zinkly Scaled</h2>
-          <p className="section-subtitle-text">Tracing our path from a local team to a trusted global engineering partner.</p>
-        </div>
-
-        <div className="timeline-container">
-          <div className="timeline-line-track"></div>
-          {timelineData.map((node, index) => (
-            <div key={index} className={`timeline-node ${index % 2 === 0 ? 'left' : 'right'}`}>
-              <div className="timeline-indicator-dot"></div>
-              <div className="timeline-node-card">
-                <span className="timeline-year">{node.year}</span>
-                <h3 className="timeline-title">{node.title}</h3>
-                <span className="timeline-subtext">{node.subLabel}</span>
-                <p className="timeline-desc">{node.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. Leadership Profiles Team Section */}
-      <section className="about-team-section">
-        <div className="section-title-block">
-          <span className="section-badge">EXPERTISE</span>
-          <h2 className="section-heading">Meet the Brains</h2>
-        </div>
-
-        <div className="team-grid">
-          {leadershipData.map((leader, index) => (
-            <div key={index} className="team-profile-card">
-              <div className="team-avatar-placeholder">
-                <div className="avatar-mesh-glow"></div>
-                <svg viewBox="0 0 24 24" className="profile-svg-icon" fill="currentColor">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-              </div>
-              <div className="profile-info">
-                <h3 className="profile-name">{leader.name}</h3>
-                <span className="profile-role">{leader.role}</span>
-                <span className="profile-credentials">{leader.credentials}</span>
-                <p className="profile-bio">{leader.bio}</p>
-                <a href={leader.linkedIn} className="profile-linkedin" aria-label={`${leader.name} LinkedIn Profile`}>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                  </svg>
-                  <span>Connect with Exec</span>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Global Ecosystem Maps */}
-      <section className="about-offices-section">
-        <div className="section-title-block centered">
-          <span className="section-badge font-green">ECOSYSTEM</span>
-          <h2 className="section-heading">Zinkly Global Reach</h2>
-          <p className="section-subtitle-text">800+ clients served across Europe, North America, and Asia-Pacific hubs.</p>
-        </div>
-
-        <div className="office-grid-cards">
-          <div className="office-card">
-            <span className="office-location">BANGALORE</span>
-            <span className="office-type">Headquarters & Dev Desk</span>
-            <p className="office-address">242 Cyber Hub, Tower B, Electronic City Phase 1, Bangalore, KA, India</p>
-            <div className="office-pulse-point active">
-              <span className="pulsing-radar"></span>
-              <span className="radar-status">120+ Active Devs</span>
-            </div>
-          </div>
-
-          <div className="office-card">
-            <span className="office-location">SILICON VALLEY</span>
-            <span className="office-type">Consulting & Strategy Hub</span>
-            <p className="office-address">450 Infinite Loop Way, Suite 120, Cupertino, California, USA</p>
-            <div className="office-pulse-point active">
-              <span className="pulsing-radar blue-radar"></span>
-              <span className="radar-status">Enterprise Strategy Desk</span>
-            </div>
-          </div>
-
-          <div className="office-card">
-            <span className="office-location">LONDON</span>
-            <span className="office-type">Support & Compliance Desk</span>
-            <p className="office-address">88 Shoreditch High St, Tech City East, London, UK</p>
-            <div className="office-pulse-point active">
-              <span className="pulsing-radar green-radar"></span>
-              <span className="radar-status">24/7 SLA Telemetry Support</span>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
+
 
 export default About;
