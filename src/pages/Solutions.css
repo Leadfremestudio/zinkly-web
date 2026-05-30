@@ -1,0 +1,225 @@
+/* Solutions Page Dedicated Stylesheet */
+
+.solutions-page-wrapper {
+  background-color: #ffffff !important;
+  color: #121316 !important;
+  font-family: var(--font-body);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 120px; /* Generous padding before global footer */
+}
+
+/* 1. SOLUTIONS HERO SECTION */
+.solutions-hero-banner {
+  position: relative;
+  padding: 140px 8% 80px 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  overflow: hidden; /* Bound the moving particles inside this section */
+}
+
+/* Dynamic Moving Blurred Gradient Particles inside the Hero */
+.solutions-moving-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1; /* Positioned behind the video and text overlays */
+  will-change: transform;
+}
+
+/* Particle 1: Enlarged, increased opacity, drifting to container edges */
+.solutions-moving-particle.particle-1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(19, 181, 92, 0.28) 0%, rgba(19, 181, 92, 0.04) 55%, transparent 70%);
+  filter: blur(50px);
+  top: 5%;
+  left: 5%;
+  animation: floatRandom1 25s infinite ease-in-out alternate;
+}
+
+/* Particle 2: Enlarged, increased opacity, drifting to container edges */
+.solutions-moving-particle.particle-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(19, 181, 92, 0.25) 0%, rgba(19, 181, 92, 0.03) 55%, transparent 70%);
+  filter: blur(60px);
+  bottom: 5%;
+  right: 5%;
+  animation: floatRandom2 30s infinite ease-in-out alternate;
+}
+
+/* Dynamic, expansive floating coordinates reaching the edges of the section */
+@keyframes floatRandom1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(320px, 120px) scale(1.15); /* Pushes particle well towards the center-right */
+  }
+  50% {
+    transform: translate(-150px, 220px) scale(0.85); /* Drifts deep left towards the edge */
+  }
+  75% {
+    transform: translate(240px, -80px) scale(1.1); /* Floats up towards the top-right boundary */
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes floatRandom2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  30% {
+    transform: translate(-350px, -120px) scale(0.9); /* Pushes deep left towards the edge boundary */
+  }
+  60% {
+    transform: translate(180px, -240px) scale(1.2); /* Floats high towards the top edge */
+  }
+  80% {
+    transform: translate(-220px, 150px) scale(0.85); /* Slides left-down towards screen boundary */
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Single centered video player matching your width specifications */
+.solutions-hero-video-container {
+  width: 100%;
+  max-width: 400px; /* Mobile width: max-w-[400px] */
+  margin: 0 auto 35px auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent; /* Changed from white to transparent to prevent edge clipping */
+  overflow: hidden;
+  border-radius: 24px;
+  z-index: 5; /* Sit on top of floating particles */
+  mix-blend-mode: multiply; /* Blends the video's white background seamlessly with moving particles */
+}
+
+.solutions-hero-video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px;
+  will-change: transform;
+  transform: translate3d(0, 0, 0); /* Force GPU rendering to prevent scroll-flicker */
+}
+
+/* Hero text centered directly under the video */
+.solutions-hero-content {
+  max-width: 800px;
+  margin-top: 10px;
+  z-index: 5; /* Sit on top of floating particles */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solutions-page-title {
+  font-family: var(--font-headings);
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #121316;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+
+.solutions-page-title span.accent-green {
+  color: var(--primary-green);
+}
+
+.solutions-page-subtitle {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: #4a5568;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+
+@media (min-width: 768px) {
+  .solutions-hero-video-container {
+    max-width: 650px; /* Desktop width: md:max-w-[650px] */
+  }
+}
+
+@media (max-width: 768px) {
+  .solutions-hero-banner {
+    padding: 140px 6% 60px 6%;
+  }
+  .solutions-hero-video-container {
+    margin-bottom: 24px;
+    border-radius: 16px;
+  }
+  .solutions-hero-video {
+    border-radius: 16px;
+  }
+  .solutions-page-title {
+    font-size: 38px;
+  }
+  .solutions-moving-particle.particle-1 {
+    width: 280px;
+    height: 280px;
+  }
+  .solutions-moving-particle.particle-2 {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Light Theme Navigation overrides for Zinkly Header on Solutions Page */
+body.solutions-header-theme .app-header {
+  background-color: #ffffff !important;
+  position: relative !important;
+  padding: 16px 8% !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.solutions-header-theme .logo-web {
+  color: #121316 !important;
+}
+
+body.solutions-header-theme .logo-castle {
+  color: #121316 !important;
+}
+
+body.solutions-header-theme .logo-subtext {
+  color: #64748b !important;
+}
+
+body.solutions-header-theme .nav-link {
+  color: #4a5568 !important;
+}
+
+body.solutions-header-theme .nav-link:hover,
+body.solutions-header-theme .nav-link.active {
+  color: var(--primary-green) !important;
+}
+
+body.solutions-header-theme .menu-burger {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.solutions-header-theme .menu-burger .burger-line {
+  background-color: var(--primary-green) !important;
+}
+
+body.solutions-header-theme .menu-burger:hover .burger-line {
+  background-color: #121316 !important;
+}
