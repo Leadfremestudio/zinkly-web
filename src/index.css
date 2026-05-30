@@ -75,7 +75,7 @@ body {
 /* Typographical Helpers */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-headings);
-  font-weight: 600;
+  font-weight: 400 !important;
   letter-spacing: -0.02em;
 }
 
