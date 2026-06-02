@@ -9,7 +9,7 @@ const CaseStudyCard = ({ project, setCursorText, setIsCursorActive }) => {
       rel="noopener noreferrer"
       className={`bento-case-card ${project.gridClass}`}
       onMouseEnter={() => {
-        setCursorText("Visit Site");
+        setCursorText(project.category);
         setIsCursorActive(true);
       }}
       onMouseLeave={() => {

@@ -72,15 +72,6 @@ const ServiceCard = ({ card, index, setCursorText, setIsCursorActive, setIsCurso
     <div 
       className={`service-card reveal reveal-up ${delayClass}`}
       id={card.id}
-      onMouseEnter={() => {
-        setCursorText(getBubbleText(card.id));
-        setIsCursorActive(true);
-        setIsCursorDark(true);
-      }}
-      onMouseLeave={() => {
-        setIsCursorActive(false);
-        setIsCursorDark(false);
-      }}
     >
       <div className="service-icon-wrapper">
         <div className={`circle-icon ${circleIconBg}`}>

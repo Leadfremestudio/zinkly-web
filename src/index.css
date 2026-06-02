@@ -46,6 +46,35 @@ body {
   line-height: 1.6;
 }
 
+p, .paragraph-text {
+  font-size: 18px;
+  color: #4a5568; /* Slate gray for light mode */
+  line-height: 1.6;
+}
+
+/* Light muted slate gray for dark mode/theme paragraphs and containers */
+.service-detail-wrapper .paragraph-text,
+.project-detail-wrapper .paragraph-text,
+.insights-page-wrapper .paragraph-text,
+.insight-detail-wrapper .paragraph-text,
+.contact-page-wrapper .paragraph-text,
+.carousel-content .paragraph-text,
+.stats-grid .paragraph-text,
+.slide-content-wrapper .paragraph-text,
+.hero-description,
+.value-desc,
+.timeline-desc,
+.pillar-desc,
+.blueprint-step-desc,
+.matrix-tech-desc,
+.vertical-profile-desc,
+.check-desc,
+.cta-card-desc-ref,
+body:not(.solutions-header-theme) p,
+body:not(.about-header-theme) p {
+  color: #94a3b8;
+}
+
 /* Layout container */
 #root {
   width: 100%;

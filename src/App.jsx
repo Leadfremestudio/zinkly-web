@@ -11,15 +11,7 @@ import BackToTop from './components/BackToTop';
 
 // Multi-Page shells
 import Home from './pages/Home';
-import About from './pages/About';
-import ServicesPage from './pages/Services';
-import ServiceDetail from './pages/ServiceDetail';
-import Projects from './pages/Projects';
-import ProjectDetail from './pages/ProjectDetail';
 import Solutions from './pages/Solutions';
-import Insights from './pages/Insights';
-import InsightDetail from './pages/InsightDetail';
-import Contact from './pages/Contact';
 
 import './App.css';
 
@@ -126,25 +118,6 @@ function App() {
           } 
         />
         <Route 
-          path="/about" 
-          element={
-            <About 
-              setCursorText={setCursorText} 
-              setIsCursorActive={setIsCursorActive} 
-              setIsCursorDark={setIsCursorDark} 
-            />
-          } 
-        />
-        <Route path="/services" element={<Navigate to="/" replace />} />
-        <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
-        <Route 
-          path="/projects" 
-          element={
-            <Navigate to="/" replace />
-          } 
-        />
-        <Route path="/projects/:id" element={<Navigate to="/" replace />} />
-        <Route 
           path="/solutions" 
           element={
             <Solutions 
@@ -154,9 +127,19 @@ function App() {
             />
           } 
         />
+        
+        {/* Redirect deleted routes to Home to prevent 404 page breaks */}
+        <Route path="/about" element={<Navigate to="/" replace />} />
+        <Route path="/services" element={<Navigate to="/" replace />} />
+        <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
+        <Route path="/projects" element={<Navigate to="/" replace />} />
+        <Route path="/projects/:id" element={<Navigate to="/" replace />} />
         <Route path="/insights" element={<Navigate to="/" replace />} />
         <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
         <Route path="/contact" element={<Navigate to="/" replace />} />
+        
+        {/* Fallback route */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       {/* Global Rich Conversion Footer */}

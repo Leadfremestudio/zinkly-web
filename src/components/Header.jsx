@@ -48,37 +48,12 @@ function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
-              About Us
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/services" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
-              Services
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/projects" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
-              Projects
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/solutions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
               Solutions
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/insights" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
-              Insights
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
-              Contact
-            </NavLink>
-          </li>
           <li className="mobile-only-action">
-            <Link to="/contact" className="talk-button mobile-talk-button" onClick={closeMenu}>
+            <Link to="/solutions" className="talk-button mobile-talk-button" onClick={closeMenu}>
               Let's Talk
             </Link>
           </li>
@@ -86,7 +61,7 @@ function Header() {
       </nav>
 
       <div className="header-actions">
-        <Link to="/contact" className="talk-button" id="lets-talk-btn" onClick={closeMenu}>
+        <Link to="/solutions" className="talk-button" id="lets-talk-btn" onClick={closeMenu}>
           Let's Talk
         </Link>
         <button

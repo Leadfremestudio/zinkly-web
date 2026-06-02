@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import usePageMetadata from '../hooks/usePageMetadata';
 import useScrollReveal from '../hooks/useScrollReveal';
 import './Solutions.css';
-import './About.css';
 
 // Import Video
 import solutionsVideo from '../assets/videos/Solutions_Animation_4d19aed67d.mp4';
@@ -12,60 +11,60 @@ import solutionsVideo from '../assets/videos/Solutions_Animation_4d19aed67d.mp4'
 const BrandLogos = {
   TaskUs: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      <path d="m9 11 2 2 4-4"/>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 11 2 2 4-4" />
     </svg>
   ),
   Tasktop: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12 8 8 12 12 16"/>
-      <line x1="16" y1="12" x2="8" y2="12"/>
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 8 8 12 12 16" />
+      <line x1="16" y1="12" x2="8" y2="12" />
     </svg>
   ),
   Taskode: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <polyline points="16 18 22 12 16 6"/>
-      <polyline points="8 6 2 12 8 18"/>
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
     </svg>
   ),
   Taskrabbit: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
     </svg>
   ),
   Smartcat: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
     </svg>
   ),
   Spherule: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <circle cx="12" cy="12" r="8"/>
-      <circle cx="12" cy="12" r="3"/>
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="3" />
     </svg>
   ),
   Boltshift: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
     </svg>
   ),
   Lightbox: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-      <line x1="9" y1="9" x2="15" y2="15"/>
-      <line x1="15" y1="9" x2="9" y2="15"/>
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <line x1="9" y1="9" x2="15" y2="15" />
+      <line x1="15" y1="9" x2="9" y2="15" />
     </svg>
   ),
   AcmeCorp: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+      <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
     </svg>
   ),
   Nietzsche: () => (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="brand-svg">
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
     </svg>
   )
 };
@@ -88,50 +87,7 @@ const row2Brands = [
   { name: 'Nietzsche', Icon: BrandLogos.Nietzsche }
 ];
 
-// High-performance Count Up animation component
-function CountUpNumber({ end, prefix = "", suffix = "", duration = 2000 }) {
-  const [count, setCount] = useState(0);
-  const elementRef = useRef(null);
-  const hasAnimated = useRef(false);
 
-  useEffect(() => {
-    if (!('IntersectionObserver' in window)) {
-      setCount(end);
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      if (entry.isIntersecting && !hasAnimated.current) {
-        hasAnimated.current = true;
-        let startTimestamp = null;
-        const step = (timestamp) => {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          setCount(Math.floor(progress * end));
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          } else {
-            setCount(end);
-          }
-        };
-        window.requestAnimationFrame(step);
-        observer.unobserve(elementRef.current);
-      }
-    }, { threshold: 0.1 });
-
-    const currentEl = elementRef.current;
-    if (currentEl) {
-      observer.observe(currentEl);
-    }
-
-    return () => {
-      if (currentEl) observer.disconnect();
-    };
-  }, [end, duration]);
-
-  return <span ref={elementRef}>{prefix}{count}{suffix}</span>;
-}
 
 function Solutions() {
   usePageMetadata(
@@ -148,7 +104,7 @@ function Solutions() {
   useEffect(() => {
     // Enable light theme header on body
     document.body.classList.add('solutions-header-theme');
-    
+
     // Explicitly guarantee play is invoked on mount
     if (videoRef.current) {
       videoRef.current.play().catch((err) => {
@@ -186,9 +142,9 @@ function Solutions() {
         {/* Heading & description text directly UNDER the video */}
         <div className="solutions-hero-content">
           <h1 className="solutions-page-title">
-            Our <span className="accent-green">Solutions.</span>
+            Our Solutions.
           </h1>
-          <p className="solutions-page-subtitle">
+          <p className="solutions-page-subtitle paragraph-text">
             We build smart, scalable digital solutions that empower businesses to operate better, serve customers faster, and grow with confidence.
           </p>
         </div>
@@ -196,7 +152,6 @@ function Solutions() {
 
       {/* 2. LOGO MARQUEE SECTION (Pasted from About page) */}
       <section className="logo-marquee-sec">
-        {/* Layer 1: Scrolling Left */}
         <div className="logo-marquee-container">
           <div className="logo-marquee-track track-left">
             {[...Array(6)].flatMap(() => row1Brands).map((brand, idx) => {
@@ -213,7 +168,6 @@ function Solutions() {
           </div>
         </div>
 
-        {/* Layer 2: Scrolling Right */}
         <div className="logo-marquee-container" style={{ marginTop: '24px' }}>
           <div className="logo-marquee-track track-right">
             {[...Array(4)].flatMap(() => row2Brands).map((brand, idx) => {
@@ -231,45 +185,7 @@ function Solutions() {
         </div>
       </section>
 
-      {/* 3. COUNT/STATS SECTION (Pasted from About page) */}
-      <section className="about-count-sec reveal reveal-up">
-        <div className="count-sec-left">
-          <h2 className="count-sec-heading">
-            Empowering your <br />
-            success <span className="accent-muted">with our <br /> solutions</span>
-          </h2>
-        </div>
 
-        <div className="count-sec-right">
-          <div className="about-stat-card">
-            <div className="about-stat-num">
-              <CountUpNumber end={15} suffix="k" />
-            </div>
-            <div className="about-stat-label">Global Downloads</div>
-          </div>
-
-          <div className="about-stat-card">
-            <div className="about-stat-num">
-              <CountUpNumber end={20} prefix="$" suffix="M" />
-            </div>
-            <div className="about-stat-label">Return Investment</div>
-          </div>
-
-          <div className="about-stat-card">
-            <div className="about-stat-num">
-              <CountUpNumber end={200} suffix="+" />
-            </div>
-            <div className="about-stat-label">5-Star Reviews</div>
-          </div>
-
-          <div className="about-stat-card">
-            <div className="about-stat-num">
-              <CountUpNumber end={500} />
-            </div>
-            <div className="about-stat-label">Projects Completed</div>
-          </div>
-        </div>
-      </section>
 
       {/* 4. ABOUT US DESCRIPTION SECTION (Pasted from About page) */}
       <section className="about-desc-sec reveal reveal-up">
@@ -282,16 +198,16 @@ function Solutions() {
 
       {/* 5. DETAILED SERVICES SECTION (6 Alternating Layouts) (Pasted from About page) */}
       <section className="detailed-services-sec">
-        
+
         {/* Subsection 1: Web Development (Left Content, Right Image, White Background) */}
         <div className="detailed-service-item reveal reveal-up">
           <div className="service-item-content">
             <span className="service-item-badge">Web Development</span>
             <h2 className="service-item-title">
               Bespoke Headless <br />
-              <span className="accent-green">Web Solutions</span>
+              <span className="accent-blue">Web Solutions</span>
             </h2>
-            <p className="service-item-desc">
+            <p className="service-item-desc paragraph-text">
               We design and engineer high-performance web systems tailored to your specific brand identity. By utilizing headless architectures, static site generation, and optimized content delivery networks, Zinkly guarantees lightning-fast loading speeds, superior SEO performance, and bulletproof security.
             </p>
           </div>
@@ -309,9 +225,9 @@ function Solutions() {
             <span className="service-item-badge">App Development</span>
             <h2 className="service-item-title">
               High-Scale Mobile & <br />
-              <span className="accent-green">Enterprise Apps</span>
+              <span className="accent-purple">Enterprise Apps</span>
             </h2>
-            <p className="service-item-desc">
+            <p className="service-item-desc paragraph-text">
               From enterprise SaaS portals to consumer mobile apps, Zinkly engineers secure, data-driven systems optimized for cross-platform efficiency. We build responsive and responsive architectures using React Native, Flutter, and native frameworks to ensure top-notch performance.
             </p>
           </div>
@@ -323,9 +239,9 @@ function Solutions() {
             <span className="service-item-badge">Automation</span>
             <h2 className="service-item-title">
               Intelligent Pipeline & <br />
-              <span className="accent-green">Workflow Automation</span>
+              <span className="accent-orange">Workflow Automation</span>
             </h2>
-            <p className="service-item-desc">
+            <p className="service-item-desc paragraph-text">
               Eliminate friction and human error. Zinkly designs advanced robotic process automations (RPA), custom database sync pipelines, and continuous integration triggers to automate your most critical business tasks, saving thousands of developer hours.
             </p>
           </div>
@@ -343,9 +259,9 @@ function Solutions() {
             <span className="service-item-badge">IT Consultation</span>
             <h2 className="service-item-title">
               Expert Strategic & <br />
-              <span className="accent-green">Technical Consultation</span>
+              <span className="accent-teal">Technical Consultation</span>
             </h2>
-            <p className="service-item-desc">
+            <p className="service-item-desc paragraph-text">
               We define technical roadmaps, architectural strategies, cloud-native readiness, and secure compliance audits to align your software engineering stack with your global business objectives.
             </p>
           </div>
@@ -357,9 +273,9 @@ function Solutions() {
             <span className="service-item-badge">Digital Marketing</span>
             <h2 className="service-item-title">
               Data-Driven Campaigns & <br />
-              <span className="accent-green">Growth Marketing</span>
+              <span className="accent-red">Growth Marketing</span>
             </h2>
-            <p className="service-item-desc">
+            <p className="service-item-desc paragraph-text">
               Amplify your brand reach, drive high-intent conversion traffic, and dominate channels. Zinkly designs robust digital ad funnels, performance metrics analytics, and multi-channel campaigns.
             </p>
           </div>
@@ -379,7 +295,7 @@ function Solutions() {
               Authority Architecture & <br />
               <span className="accent-green">Search Ranking Domination</span>
             </h2>
-            <p className="service-item-desc">
+            <p className="service-item-desc paragraph-text">
               Capture search intent and scale organic traffic. We specialize in deep technical SEO audits, keyword gap architectures, Core Web Vitals optimization, and high-quality link-building programs.
             </p>
           </div>

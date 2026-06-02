@@ -49,7 +49,6 @@ function Hero() {
           {/* Slide Content */}
           <div className="carousel-content">
             <div className="slide-content-wrapper">
-              <span className="hero-subtitle">{slide.subtitle}</span>
               <h1 className="hero-title">{slide.title}</h1>
               <p className="hero-description">{slide.description}</p>
             </div>

@@ -51,9 +51,8 @@ function Footer() {
           <div className="footer-links-col-premium">
             <h4 className="footer-col-title-premium">Quick Links</h4>
             <ul className="footer-links-list-premium">
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/solutions">Solutions</Link></li>
             </ul>
           </div>
 
@@ -61,9 +60,7 @@ function Footer() {
           <div className="footer-links-col-premium">
             <h4 className="footer-col-title-premium">Help</h4>
             <ul className="footer-links-list-premium">
-              <li><Link to="/contact">FAQs</Link></li>
               <li><a href="mailto:hello@zinkly.com">Email Support</a></li>
-              <li><Link to="/contact">Help centre</Link></li>
             </ul>
           </div>
         </div>
