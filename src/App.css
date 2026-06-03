@@ -692,220 +692,185 @@ canvas#wave {
   transform: translateX(4px);
 }
 
-/* SERVICES SECTION */
+/* SERVICES SECTION GLASSMORPHISM */
 .services-section {
   position: relative;
-  background-color: #f4f4f4; /* Subtle soft grey backdrop */
+  background-color: #f8fafc; /* Light off-white background matching glas.html */
   padding: 120px 8%;
   z-index: 10;
   border-top: 1px solid #eef2f5;
-}
-
-.services-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 70px;
-}
-
-.services-badge {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--primary-green);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  display: inline-block;
-  margin-bottom: 20px;
-}
-
-.services-heading {
-  font-size: 42px;
-  line-height: 1.3;
-  font-weight: 800;
-  color: #121316;
-  margin: 0;
-}
-
-.view-all-btn {
-  display: inline-block;
-  padding: 12px 34px;
-  font-family: var(--font-headings);
-  font-size: 14px;
-  font-weight: 600;
-  color: #121316;
-  background: transparent;
-  border: 1px solid #c8d2d9;
-  border-radius: var(--button-radius);
-  text-decoration: none;
-  transition: var(--transition-smooth);
-  position: relative;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  z-index: 1;
 }
 
-.view-all-btn::before {
-  content: '';
+.services-section .container {
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* --- Animated Background Blobs --- */
+.services-section .blob {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 140%;
-  padding-bottom: 140%;
+  filter: blur(90px);
+  z-index: 1;
+  opacity: 0.75;
   border-radius: 50%;
-  background-color: var(--primary-green);
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: -1;
-  pointer-events: none;
+  animation: servicesFloat 15s infinite alternate ease-in-out;
 }
 
-.view-all-btn:hover {
-  color: #ffffff;
-  border-color: var(--primary-green);
-  box-shadow: 0 8px 20px rgba(19, 181, 92, 0.25);
-  background-color: var(--primary-green);
+.services-section .blob-1 {
+  top: 10%;
+  left: 10%;
+  width: 450px;
+  height: 450px;
+  background: rgba(32, 201, 151, 0.45); 
+  animation-delay: 0s;
 }
 
-.view-all-btn:hover::before {
-  transform: translate(-50%, -50%) scale(2);
+.services-section .blob-2 {
+  bottom: -10%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: rgba(16, 185, 129, 0.40); 
+  animation-duration: 18s;
 }
 
-.services-grid {
+.services-section .blob-3 {
+  top: 30%;
+  left: 40%;
+  width: 350px;
+  height: 350px;
+  background: rgba(132, 204, 22, 0.35); 
+  animation-duration: 20s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes servicesFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* --- Header Styling --- */
+.services-section .section-header {
+  margin-bottom: 60px;
+}
+
+.services-section .subtitle {
+  display: block;
+  color: #10b981; 
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  font-family: var(--font-headings);
+}
+
+.services-section .title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 300; 
+  color: #111; 
+  line-height: 1.2;
+  font-family: var(--font-headings);
+}
+
+/* --- Cards Grid --- */
+.services-section .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
 
-.service-card {
+/* --- The PERFECTED Glass Card --- */
+.services-section .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.6), 0 25px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  padding: 50px 40px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
   position: relative;
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: var(--button-radius);
-  padding: 44px 34px;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  transition: var(--transition-smooth);
-  z-index: 1;
 }
 
-
-
-/* Removed black radial background center expanding hover effect */
-.service-card::before {
-  content: none;
-}
-
-.service-card:hover {
+.services-section .glass-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
-  border-color: #e2e8f0;
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.9), 0 35px 60px rgba(0, 0, 0, 0.08);
 }
 
-.service-card-title {
-  font-family: var(--font-headings);
-  font-size: 22px;
-  font-weight: 700;
-  color: #121316;
-  margin: 25px 0 15px 0;
-  transition: color 0.4s ease;
-}
-
-.service-card-desc {
-  line-height: 1.7;
-  color: #555c66;
-  margin-bottom: 35px;
-  transition: color 0.4s ease;
-}
-
-.service-icon-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.circle-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--button-radius);
+/* --- Card Content --- */
+.services-section .icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 22px; 
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  align-items: center;
+  margin-bottom: 35px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
 }
 
-.service-card:hover .circle-icon {
-  transform: scale(1.1);
+/* Icon Colors */
+.services-section .icon-red {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border: 1.5px solid #ef4444;
+  color: #ef4444;
 }
-
-.pink-bg {
-  background-color: #ff2d55;
-  border: 2px solid #ff2d55;
+.services-section .icon-blue {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
   color: #ffffff;
 }
-
-.service-card:hover .pink-bg {
-  background-color: transparent;
-  color: #ff2d55;
-}
-
-.blue-bg {
-  background-color: #4a5cf7;
-  border: 2px solid #4a5cf7;
+.services-section .icon-green {
+  background: linear-gradient(135deg, #10b981, #059669);
   color: #ffffff;
 }
-
-.service-card:hover .blue-bg {
-  background-color: transparent;
-  color: #4a5cf7;
-}
-
-.green-bg {
-  background-color: #109f50;
-  border: 2px solid #109f50;
-  color: #ffffff;
-}
-
-.service-card:hover .green-bg {
-  background-color: transparent;
-  color: #109f50;
-}
-
-.orange-bg {
-  background-color: #f97316;
-  border: 2px solid #f97316;
-  color: #ffffff;
-}
-
-.service-card:hover .orange-bg {
-  background-color: transparent;
+.services-section .icon-orange {
+  background: linear-gradient(135deg, #ffedd5, #fdba74);
   color: #f97316;
+  border: 1.5px solid #f97316;
 }
-
-.purple-bg {
-  background-color: #8b5cf6;
-  border: 2px solid #8b5cf6;
+.services-section .icon-purple {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
   color: #ffffff;
 }
 
-.service-card:hover .purple-bg {
-  background-color: transparent;
-  color: #8b5cf6;
+.services-section .icon-wrapper svg {
+  width: 32px;
+  height: 32px;
 }
 
-.service-tech-logos {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  border-top: 1px solid #eef2f5;
-  padding-top: 20px;
+.services-section .glass-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 20px;
+  font-family: var(--font-headings);
+}
+
+.services-section .glass-card p {
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: #64748b;
-  transition: border-color 0.4s ease, color 0.4s ease;
+  font-weight: 300;
+  font-family: var(--font-body);
 }
 
-.tech-item {
-  display: flex;
-  align-items: center;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .services-section .glass-card {
+    padding: 40px 30px;
+  }
+  .services-section {
+    padding: 80px 8%;
+  }
 }
 
 /* Custom Cursor Follower Container - Direct absolute positioning tracker, no lag, no CSS transform conflict */
