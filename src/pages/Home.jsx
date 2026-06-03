@@ -19,7 +19,11 @@ function Home({ setCursorText, setIsCursorActive, setIsCursorDark }) {
       <Hero />
 
       {/* 2. Overlapping Collage About Teaser */}
-      <About />
+      <About 
+        setCursorText={setCursorText} 
+        setIsCursorActive={setIsCursorActive} 
+        setIsCursorDark={setIsCursorDark} 
+      />
 
       {/* 3. Reusable 6-Card Services Grid */}
       <Services 
