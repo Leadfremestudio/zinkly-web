@@ -86,10 +86,6 @@ const ServiceCard = ({ card, index }) => {
 function Services({ setCursorText, setIsCursorActive, setIsCursorDark }) {
   return (
     <section id="services" className="services-section">
-      <div className="blob blob-1"></div>
-      <div className="blob blob-2"></div>
-      <div className="blob blob-3"></div>
-
       <div className="container">
         <div className="section-header reveal reveal-up">
           <span className="subtitle">What We Do</span>

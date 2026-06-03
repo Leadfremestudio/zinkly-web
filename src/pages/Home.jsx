@@ -18,19 +18,27 @@ function Home({ setCursorText, setIsCursorActive, setIsCursorDark }) {
       {/* 1. Main Banner Autoplay Carousel & Stats */}
       <Hero />
 
-      {/* 2. Overlapping Collage About Teaser */}
-      <About 
-        setCursorText={setCursorText} 
-        setIsCursorActive={setIsCursorActive} 
-        setIsCursorDark={setIsCursorDark} 
-      />
+      {/* Combined About & Services Section with unified floating blobs */}
+      <section className="about-services-combined-section">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+        <div className="blob blob-4"></div>
 
-      {/* 3. Reusable 6-Card Services Grid */}
-      <Services 
-        setCursorText={setCursorText} 
-        setIsCursorActive={setIsCursorActive} 
-        setIsCursorDark={setIsCursorDark} 
-      />
+        {/* 2. Overlapping Collage About Teaser */}
+        <About 
+          setCursorText={setCursorText} 
+          setIsCursorActive={setIsCursorActive} 
+          setIsCursorDark={setIsCursorDark} 
+        />
+
+        {/* 3. Reusable 6-Card Services Grid */}
+        <Services 
+          setCursorText={setCursorText} 
+          setIsCursorActive={setIsCursorActive} 
+          setIsCursorDark={setIsCursorDark} 
+        />
+      </section>
 
       {/* 4. Flagship Bento Case Studies and Browser Previews */}
       <CaseStudies 
