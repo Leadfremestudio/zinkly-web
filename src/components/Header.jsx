@@ -52,6 +52,11 @@ function Header() {
               Solutions
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
+              Contact Us
+            </NavLink>
+          </li>
           <li className="mobile-only-action">
             <Link to="/solutions" className="talk-button mobile-talk-button" onClick={closeMenu}>
               Let's Talk

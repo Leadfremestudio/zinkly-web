@@ -1,53 +1,42 @@
 import { servicesData } from '../data';
 
-// Helper to render main service icons based on ID (outline SVGs from glas.html)
+// Helper to render main service icons based on ID
 const ServiceIcon = ({ id }) => {
   switch (id) {
     case 'service-web':
       return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" width="32" height="32">
-          <rect x="3" y="6" width="18" height="11" rx="2" ry="2"></rect>
-          <line x1="12" y1="17" x2="12" y2="20"></line>
-          <line x1="9" y1="20" x2="15" y2="20"></line>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-8-3l-3-3 3-3 1.4 1.4-1.6 1.6 1.6 1.6L12 15zm4-3l-3 3-1.4-1.4 1.6-1.6-1.6-1.6L16 12z"/>
         </svg>
       );
     case 'service-app':
       return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" width="32" height="32">
-          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zM16 8H8v2h8V8zm0 3H8v2h8v-2z"/>
         </svg>
       );
     case 'service-auto':
       return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" width="32" height="32">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
         </svg>
       );
     case 'service-consult':
       return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" width="32" height="32">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
         </svg>
       );
     case 'service-marketing':
       return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" width="32" height="32">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-          <line x1="8" y1="21" x2="16" y2="21"></line>
-          <line x1="12" y1="17" x2="12" y2="21"></line>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M18 4v1h-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h5v2H7v2h10v-2h-2v-2h1c.55 0 1-.45 1-1v-1h1c1.66 0 3-1.34 3-3V7c0-1.66-1.34-3-3-3zm-5 14H11v-2h2v2zm6-6c0 .55-.45 1-1 1h-1V8h1c.55 0 1 .45 1 1v3zM7 9h8v6H7V9z"/>
         </svg>
       );
     case 'service-seo':
       return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" width="32" height="32">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          <line x1="11" y1="8" x2="11" y2="14"></line>
-          <line x1="8" y1="11" x2="14" y2="11"></line>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
         </svg>
       );
     default:
@@ -58,49 +47,51 @@ const ServiceIcon = ({ id }) => {
 // Reusable ServiceCard Sub-Component
 const ServiceCard = ({ card, index }) => {
   const circleIconBg = card.id === 'service-web'
-    ? 'icon-red'
+    ? 'pink-bg'
     : card.id === 'service-app'
-      ? 'icon-blue'
+      ? 'blue-bg'
       : card.id === 'service-marketing'
-        ? 'icon-orange'
+        ? 'orange-bg'
         : card.id === 'service-seo'
-          ? 'icon-purple'
-          : 'icon-green';
+          ? 'purple-bg'
+          : 'green-bg';
 
   const delayClass = `delay-${((index % 3) + 1) * 100}`;
 
   return (
     <div 
-      className={`glass-card reveal reveal-up ${delayClass}`}
+      className={`service-card reveal reveal-up ${delayClass}`}
       id={card.id}
     >
-      <div className={`icon-wrapper ${circleIconBg}`}>
-        <ServiceIcon id={card.id} />
+      <div className="service-icon-wrapper">
+        <div className={`circle-icon ${circleIconBg}`}>
+          <ServiceIcon id={card.id} />
+        </div>
       </div>
-      <h3>{card.title}</h3>
-      <p>{card.description}</p>
+      <h3 className="service-card-title">{card.title}</h3>
+      <p className="service-card-desc">{card.description}</p>
     </div>
   );
 };
 
-function Services({ setCursorText, setIsCursorActive, setIsCursorDark }) {
+function Services() {
   return (
     <section id="services" className="services-section">
-      <div className="container">
-        <div className="section-header reveal reveal-up">
-          <span className="subtitle">What We Do</span>
-          <h2 className="title">Perfect Solution For Your Business</h2>
+      <div className="services-header reveal reveal-up">
+        <div className="services-header-left">
+          <span className="services-badge">What We Do</span>
+          <h2 className="services-heading">Perfect Solution For Your Business</h2>
         </div>
+      </div>
 
-        <div className="cards-grid">
-          {servicesData.map((card, index) => (
-            <ServiceCard
-              key={card.id}
-              card={card}
-              index={index}
-            />
-          ))}
-        </div>
+      <div className="services-grid six-cards-grid">
+        {servicesData.map((card, index) => (
+          <ServiceCard
+            key={card.id}
+            card={card}
+            index={index}
+          />
+        ))}
       </div>
     </section>
   );

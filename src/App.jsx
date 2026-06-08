@@ -12,6 +12,7 @@ import BackToTop from './components/BackToTop';
 // Multi-Page shells
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
+import Contact from './pages/Contact';
 
 import './App.css';
 
@@ -136,7 +137,16 @@ function App() {
         <Route path="/projects/:id" element={<Navigate to="/" replace />} />
         <Route path="/insights" element={<Navigate to="/" replace />} />
         <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
-        <Route path="/contact" element={<Navigate to="/" replace />} />
+        <Route 
+          path="/contact" 
+          element={
+            <Contact 
+              setCursorText={setCursorText} 
+              setIsCursorActive={setIsCursorActive} 
+              setIsCursorDark={setIsCursorDark} 
+            />
+          } 
+        />
         
         {/* Fallback route */}
         <Route path="*" element={<Navigate to="/" replace />} />
