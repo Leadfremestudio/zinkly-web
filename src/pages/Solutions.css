@@ -816,6 +816,26 @@ body.about-header-theme .menu-burger:hover .burger-line {
   color: var(--primary-green);
 }
 
+.service-item-title span.accent-blue {
+  color: #1d4ed8; /* Vibrant royal blue matching the laptop development screen */
+}
+
+.service-item-title span.accent-purple {
+  color: #6d28d9; /* Deep violet-purple matching the mobile app mockups */
+}
+
+.service-item-title span.accent-orange {
+  color: #ea580c; /* Tech orange matching the automation robotics background */
+}
+
+.service-item-title span.accent-teal {
+  color: #0f766e; /* Corporate teal matching the analytics and consultation graphs */
+}
+
+.service-item-title span.accent-red {
+  color: #be123c; /* Conversion rose-red matching the growth marketing dashboards */
+}
+
 .service-item-desc {
   font-size: 15px;
   line-height: 1.65;
