@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import contactBg from '../assets/contact-bg.jpg';
-import './Contact.css';
+import { useState, useEffect } from "react";
+import contactBg from "../assets/contact-bg.jpg";
+import "./Contact.css";
 
 function Contact() {
   useEffect(() => {
@@ -10,17 +10,17 @@ function Contact() {
     };
   }, []);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -28,10 +28,10 @@ function Contact() {
     e.preventDefault();
     alert(`Thank you, ${formData.name}! Your message has been sent.`);
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: ''
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
     });
   };
 
@@ -39,66 +39,65 @@ function Contact() {
     <main className="contact-page-container">
       {/* 1. Upper Section: Background Image & Contact Form */}
       <section className="contact-sec">
-        <div 
-          className="contact-bg-wrapper" 
+        <div
+          className="contact-bg-wrapper"
           style={{ backgroundImage: `url(${contactBg})` }}
         >
           <div className="contact-main-container">
             <div className="contact-grid">
-              
               {/* Left Column: Headline */}
               <div className="contact-left-col">
-                <h1 className="contact-headline">CONTACTS US</h1>
+                <h1 className="contact-headline">CONTACT US</h1>
               </div>
 
               {/* Right Column: Form Card */}
               <div className="contact-right-col">
                 <form className="contact-form-card" onSubmit={handleSubmit}>
                   <h2 className="form-card-title">What can we do for you?</h2>
-                  
+
                   <div className="form-input-group">
-                    <input 
-                      type="text" 
-                      name="name" 
-                      value={formData.name} 
-                      onChange={handleChange} 
-                      required 
-                      placeholder="Name" 
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      placeholder="Name"
                       className="form-input-field"
                     />
                   </div>
 
                   <div className="form-input-group">
-                    <input 
-                      type="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      required 
-                      placeholder="Email" 
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Email"
                       className="form-input-field"
                     />
                   </div>
 
                   <div className="form-input-group">
-                    <input 
-                      type="tel" 
-                      name="phone" 
-                      value={formData.phone} 
-                      onChange={handleChange} 
-                      required 
-                      placeholder="Phone" 
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      placeholder="Phone"
                       className="form-input-field"
                     />
                   </div>
 
                   <div className="form-input-group textarea-group">
-                    <textarea 
-                      name="subject" 
-                      value={formData.subject} 
-                      onChange={handleChange} 
-                      required 
-                      placeholder="Subject" 
+                    <textarea
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      placeholder="Subject"
                       className="form-textarea-field"
                     ></textarea>
                   </div>
@@ -108,7 +107,6 @@ function Contact() {
                   </button>
                 </form>
               </div>
-
             </div>
           </div>
         </div>
@@ -118,7 +116,6 @@ function Contact() {
       <section className="contact-second-sec">
         <div className="contact-info-container">
           <div className="contact-info-grid">
-            
             <div className="info-block">
               <h3 className="info-block-title">CONTACT ADDRESS</h3>
               <p className="info-block-text">
@@ -129,14 +126,16 @@ function Contact() {
 
             <div className="info-block">
               <h3 className="info-block-title">CONTACT CONTACTS</h3>
-              <a href="mailto:zinkly.contact@gmail.com" className="info-block-link">
+              <a
+                href="mailto:zinkly.contact@gmail.com"
+                className="info-block-link"
+              >
                 zinkly.contact@gmail.com
               </a>
               <a href="tel:+917558077856" className="info-block-link">
                 +91 755 807 7856
               </a>
             </div>
-
           </div>
         </div>
       </section>

@@ -45,7 +45,7 @@
 
 .contact-headline {
   font-family: var(--font-headings);
-  font-size: clamp(36px, 5.5vw, 64px);
+  font-size: clamp(36px, 5.5vw, 42px);
   font-weight: 800;
   color: #555c66; /* Stark slate grey matching screenshot */
   letter-spacing: 0.03em;
@@ -60,7 +60,12 @@
 }
 
 .contact-form-card {
-  background: linear-gradient(135deg, #03301b 0%, #000000 50%, #03301b 100%); /* Green-black-green gradient matching reference image */
+  background: linear-gradient(
+    135deg,
+    #03301b 0%,
+    #000000 50%,
+    #03301b 100%
+  ); /* Green-black-green gradient matching reference image */
   border: 1px solid rgba(16, 185, 129, 0.15); /* Premium subtle green border */
   border-radius: 16px;
   padding: 48px 40px;

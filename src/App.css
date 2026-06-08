@@ -3094,8 +3094,8 @@ body.menu-open-scroll-lock {
    ============================================================ */
 .zinkly-premium-footer {
   position: relative;
-  background-color: #ffffff;
-  border-top: 1px solid #edf2f7;
+  background-color: #0c0d12;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 80px 8% 40px 8%;
   z-index: 10;
   overflow: hidden;
@@ -3125,7 +3125,7 @@ body.menu-open-scroll-lock {
   font-family: var(--font-headings);
   font-size: 28px;
   font-weight: 800;
-  color: #121316;
+  color: #ffffff;
   letter-spacing: -0.03em;
 }
 
@@ -3138,7 +3138,7 @@ body.menu-open-scroll-lock {
 .social-label-text {
   font-size: 14px;
   font-weight: 600;
-  color: #718096;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .social-icons-wrapper {
@@ -3150,25 +3150,25 @@ body.menu-open-scroll-lock {
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  color: #4a5568;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .social-pill-icon:hover {
-  background: #121316;
-  border-color: #121316;
+  background: var(--primary-green);
+  border-color: var(--primary-green);
   color: #ffffff;
   transform: translateY(-2px);
 }
 
 .footer-horizontal-divider {
   border: 0;
-  border-top: 1px solid #edf2f7;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   margin: 0;
 }
 
@@ -3185,7 +3185,7 @@ body.menu-open-scroll-lock {
 .footer-mission-statement {
   font-size: 14.5px;
   line-height: 1.7;
-  color: #718096;
+  color: rgba(255, 255, 255, 0.7);
   max-width: 290px;
   margin: 0;
 }
@@ -3194,7 +3194,7 @@ body.menu-open-scroll-lock {
   font-family: var(--font-headings);
   font-size: 15px;
   font-weight: 700;
-  color: #121316;
+  color: #ffffff;
   margin: 0 0 20px 0;
   text-transform: capitalize;
 }
@@ -3210,7 +3210,7 @@ body.menu-open-scroll-lock {
 
 .footer-links-list-premium a {
   font-size: 14px;
-  color: #718096;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   transition: color 0.25s ease;
 }
@@ -3237,8 +3237,8 @@ body.menu-open-scroll-lock {
   font-weight: 900;
   background: linear-gradient(
     to bottom,
-    rgba(18, 19, 22, 0.08) 0%,
-    rgba(18, 19, 22, 0) 100%
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3255,14 +3255,14 @@ body.menu-open-scroll-lock {
   justify-content: space-between;
   align-items: center;
   padding-top: 30px;
-  border-top: 1px solid #edf2f7;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 2;
   position: relative;
 }
 
 .footer-copyright-text {
   font-size: 13px;
-  color: #a0aec0;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .footer-legal-links-premium {
@@ -3272,13 +3272,13 @@ body.menu-open-scroll-lock {
 
 .footer-legal-links-premium a {
   font-size: 13px;
-  color: #a0aec0;
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   transition: color 0.25s ease;
 }
 
 .footer-legal-links-premium a:hover {
-  color: #121316;
+  color: var(--primary-green);
 }
 
 /* Responsive adjustment */
