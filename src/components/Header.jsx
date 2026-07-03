@@ -33,7 +33,7 @@ function Header() {
           <span className="logo-web">zink</span>
           <span className="logo-castle">ly</span>
         </div>
-        <span className="logo-subtext">Think • Build • Connect</span>
+        <span className="logo-subtext">Built Around Your Business</span>
       </Link>
 
       <nav 

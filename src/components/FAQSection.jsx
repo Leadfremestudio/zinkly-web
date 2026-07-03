@@ -3,32 +3,36 @@ import { Link } from 'react-router-dom';
 
 const faqItems = [
   {
-    question: "What verticals/niches are supported?",
-    answer: "We support a broad range of high-performance industries including Enterprise E-Commerce, Financial Services (Fintech), Supply Chain & Logistics, Healthcare, and Traditional Heritage Tourism. Our systems are tailored to handle specific compliance frameworks such as HIPAA, SOC2, and ISO certifications."
+    question: "How do you ensure my website represents my brand?",
+    answer: "We don't just build websites—we create digital experiences. Every project begins by understanding your business, target audience, and brand identity so that the final product reflects your vision while delivering an intuitive user experience."
   },
   {
-    question: "How does Zinkly work with my business?",
-    answer: "We act as your dedicated engineering and transformation partner. We start with a 48-hour discovery sprint, draft a robust cloud system architecture blueprint, and deploy dedicated agile development sprint teams. You receive constant updates via Slack, Jira, and live staging environments."
+    question: "What makes Zinkly different from other software development companies?",
+    answer: "We focus on creating technology that solves business problems—not just writing code. Our team combines technical expertise, strategic thinking, and a user-first approach to deliver scalable, future-ready digital solutions that generate measurable business value."
   },
   {
-    question: "What if I don't like the designs or strategies?",
-    answer: "We employ an iterative, feedback-driven design system process. You are involved in interactive wireframing and prototyping phases. If a strategy or visual blueprint doesn't meet your expectations, we revise it before writing a single line of production code."
+    question: "Can you automate our existing business workflows?",
+    answer: "Yes. We help businesses transform manual, time-consuming processes into intelligent automated workflows. By integrating your existing systems and digitizing routine operations, we improve operational efficiency, minimize errors, accelerate decision-making, and enable your team to focus on higher-value work."
   },
   {
-    question: "Can I see an example of the Zinkly work?",
-    answer: "Absolutely! You can browse our Bento Flagship Projects on our case studies page, which showcases live web platforms, high-traffic reservation architectures, and automated CRM pipelines built for international clients."
+    question: "What makes your team qualified to handle complex projects?",
+    answer: "Our multidisciplinary team has experience delivering projects across diverse industries and technologies. By combining technical expertise, industry best practices, and a collaborative approach, we build solutions that are secure, scalable, and designed for long-term success."
   },
   {
-    question: "Is Zinkly compliant and secure?",
-    answer: "Yes, security is built into our core architectures. We deliver robust server vaults, encrypted data pipelines, secure API integrations, and ISO-compliant database designs. All intellectual property, source code, and cloud repositories are 100% transferred to you upon project sign-off."
+    question: "What industries do you serve?",
+    answer: "We work with businesses of all sizes, from startups to large enterprises, across industries including education, healthcare, retail, logistics, finance, manufacturing, hospitality, and professional services. Every solution is tailored to the unique needs and objectives of each client."
   },
   {
-    question: "What if my competitor is using Zinkly?",
-    answer: "We maintain strict non-disclosure agreements (NDAs) and sandbox isolation protocols. Your strategic advantages, proprietary automation scripts, and custom source codes are legally protected and never shared or duplicated across vertical competitors."
+    question: "How do you ensure the quality and security of your solutions?",
+    answer: "Quality and security are integrated into every stage of our development process. We follow industry best practices, conduct rigorous testing, perform code reviews, implement secure development standards, and carry out User Acceptance Testing (UAT) before deployment. Our goal is to deliver reliable, high-performing, and secure digital solutions."
   },
   {
-    question: "I can do this myself, why do I need Zinkly?",
-    answer: "While internal teams can build basic systems, Zinkly provides senior-level software architecture expertise, proven security compliance roadmaps, and next-generation speed optimization. We save your internal teams months of trial-and-error, ensuring a fast time-to-market."
+    question: "Do you provide support after project completion?",
+    answer: "Yes. Our relationship with clients extends beyond project delivery. We offer ongoing maintenance, performance monitoring, security updates, bug fixes, backups, feature enhancements, and technical support to ensure your solution continues to perform efficiently as your business evolves"
+  },
+  {
+    question: "Do you have expertise in Artificial Intelligence (AI)?",
+    answer: "Yes. Our team specializes in developing AI-powered solutions that help businesses automate processes, improve decision-making, and enhance customer experiences. From intelligent chatbots and document processing to predictive analytics and AI integrations, we build solutions that deliver measurable business value."
   }
 ];
 
@@ -80,7 +84,7 @@ export default function FAQSection() {
 
           {/* Column 2 */}
           <div className="faq-col">
-            {faqItems.slice(4, 7).map((item, idx) => {
+            {faqItems.slice(4, 8).map((item, idx) => {
               const actualIdx = idx + 4;
               const isOpen = openIndex === actualIdx;
               return (

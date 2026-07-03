@@ -23,12 +23,18 @@ function About({ setCursorText, setIsCursorActive, setIsCursorDark }) {
       <div className="about-content reveal reveal-right delay-200">
         <span className="about-badge">ABOUT US</span>
         <h2 className="about-heading">
-          Empowering Businesses <br />
-          Grow Worldwide with <br />
-          <span className="accent-green">Innovative Digital Solutions</span>
+          Helping Businesses Stay Ahead <br />
+          In a Fast Digital World With <br />
+          <span className="accent-green">Effective Digital Solutions</span>
         </h2>
         <p className="about-description">
-          Zinkly is committed to connecting businesses across the world towards digitalisation highlighting the knowledge of skills. We, the ideal digital agency, provide bespoke solutions to meet all your digital needs. Zinkly aims to expand, innovate, or enhance businesses and propel your projects to new heights. Zinkly holds the power for better experiences.
+          In today’s fast-paced modern world, your digital presence and speed matter more than ever. Zinkly helps you get there.
+        </p>
+        <p className="about-description">
+          We focus on building simple, effective digital solutions that help businesses move faster, work smarter, and stay competitive in a changing world. Our goal is to make technology practical and easy to use so businesses can focus on growth, not complexity.
+        </p>
+        <p className="about-description">
+          At Zinkly, we believe progress comes from clarity, speed, and innovation. We help businesses strengthen their digital presence and improve how they operate in the modern world.
         </p>
         <a href="#learn-more" className="learn-more-btn" id="about-learn-more">
           Learn More

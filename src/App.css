@@ -657,6 +657,10 @@ body.menu-open-scroll-lock {
   margin-bottom: 36px;
 }
 
+.about-description:not(:last-child) {
+  margin-bottom: 16px;
+}
+
 /* Learn More outlined button */
 .learn-more-btn {
   display: inline-block;

@@ -51,12 +51,12 @@ export default function CTASection() {
 
             {/* Heading */}
             <h2 className="cta-card-title-ref">
-              Unlock the Power of Zinkly Engineering
+              Build. Automate. Scale.
             </h2>
 
             {/* Description */}
             <p className="cta-card-desc-ref">
-              Zinkly is an all-in-one software engineering partner that helps businesses manage custom architectures, optimize cloud pipelines, and automate workflows with next-gen speed.
+              Zinkly helps businesses design powerful systems, improve efficiency, and accelerate digital operations with modern engineering solutions.
             </p>
 
             {/* Centered Button */}

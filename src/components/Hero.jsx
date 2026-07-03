@@ -50,7 +50,7 @@ function Hero() {
           <div className="carousel-content">
             <div className="slide-content-wrapper">
               <h1 className="hero-title">{slide.title}</h1>
-              <p className="hero-description">{slide.description}</p>
+              {slide.description && <p className="hero-description">{slide.description}</p>}
             </div>
 
             {/* Glassmorphic Stats Grid */}

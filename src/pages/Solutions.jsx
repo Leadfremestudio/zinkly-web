@@ -190,7 +190,7 @@ const row2Brands = [
 function Solutions() {
   usePageMetadata(
     "Our Solutions",
-    "We build smart, scalable digital solutions that empower businesses to operate better, serve customers faster, and grow with confidence.",
+    "Technology should empower businesses, not complicate them. At Zinkly, we build intelligent digital solutions that help organizations innovate faster, streamline operations, and unlock sustainable growth.",
   );
 
   const videoRef = useRef(null);
@@ -241,8 +241,7 @@ function Solutions() {
         <div className="solutions-hero-content">
           <h1 className="solutions-page-title">Our Solutions.</h1>
           <p className="solutions-page-subtitle paragraph-text">
-            We build smart, scalable digital solutions that empower businesses
-            to operate better, serve customers faster, and grow with confidence.
+            Technology should empower businesses, not complicate them. At Zinkly, we build intelligent digital solutions that help organizations innovate faster, streamline operations, and unlock sustainable growth.
           </p>
         </div>
       </section>
@@ -290,12 +289,10 @@ function Solutions() {
       <section className="about-desc-sec reveal reveal-up">
         <div className="about-desc-container">
           <p className="about-desc-paragraph">
-            Struggling to stay organized, our users found the perfect solution
-            with Zinkly. By simplifying task management and boosting team
-            collaboration, they've achieved more in less time.{" "}
-            <span className="text-fade-1">Join thousands </span>
+            Every business has unique challenges, and every solution should be just as unique. At Zinkly, we combine technical expertise with strategic thinking to create digital products that are secure, scalable, and built for long-term success.{" "}
+            <span className="text-fade-1">Whether you're launching a new product, modernizing existing systems, or automating business operations, </span>
             <span className="text-fade-2">
-              who've transformed chaos into productivity
+              we help transform your vision into technology that delivers real business value.
             </span>
           </p>
         </div>

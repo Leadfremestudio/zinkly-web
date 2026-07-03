@@ -10,7 +10,7 @@ import usePageMetadata from '../hooks/usePageMetadata';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 function Home({ setCursorText, setIsCursorActive, setIsCursorDark }) {
-  usePageMetadata('Think • Build • Connect', 'Design your dreams and scale your software systems. Zinkly is a high-performance premium IT engineering and digital transformation consulting agency.');
+  usePageMetadata('Built Around Your Business', 'Design your dreams and scale your software systems. Zinkly is a high-performance premium IT engineering and digital transformation consulting agency.');
   useScrollReveal();
 
   return (

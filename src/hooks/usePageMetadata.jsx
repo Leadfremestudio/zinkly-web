@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 function usePageMetadata(title, description = '') {
   useEffect(() => {
     // Set document title
-    document.title = title ? `Zinkly | ${title}` : 'Zinkly - Think • Build • Connect';
+    document.title = title ? `Zinkly | ${title}` : 'Zinkly - Built Around Your Business';
 
     // Update or create meta description
     let metaDescription = document.querySelector('meta[name="description"]');

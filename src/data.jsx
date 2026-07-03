@@ -12,18 +12,18 @@ export const heroSlides = [
   {
     id: 0,
     label: 'Partner',
-    subtitle: 'Think • Build • Connect',
+    subtitle: 'Built Around Your Business',
     title: (
       <>
-        Trusted{' '}
+        Your Trusted{' '}
         <span className="accent-word">
-          <span className="accent-green-char">T</span>ransformation
+          <span className="accent-green-char">P</span>artner
         </span>
         <br />
-        Partner
+        in Technology
       </>
     ),
-    description: 'Design Your Dreams And Build Success, Transform Your Digital Presence With Our Innovative And Ingenious Solutions.',
+    description: '',
     bg: slide1
   },
   {
@@ -49,15 +49,16 @@ export const heroSlides = [
     subtitle: 'Secure • Robust • Scalable',
     title: (
       <>
-        Cloud-Native
-        <br />
+        Reimagining{' '}
         <span className="accent-word">
-          <span className="accent-green-char">A</span>utomation
+          <span className="accent-green-char">B</span>usiness
         </span>{' '}
-        Hub
+        operations
+        <br />
+        for a faster digital world.
       </>
     ),
-    description: 'Scale seamlessly with secure infrastructures, fast-loading cloud assets, and high-conversion landing pages built for growth.',
+    description: '',
     bg: slide3
   }
 ];
@@ -75,7 +76,7 @@ export const servicesData = [
   {
     id: 'service-web',
     title: 'Website Development',
-    description: 'Zinkly is a top quality web development company aimed at creating a better brand impression and user-friendly interface for your website.',
+    description: 'Modern, user-friendly websites designed to strengthen brand presence and deliver smooth user experiences.',
     techBadges: [
       { name: 'WordPress', type: 'wordpress' },
       { name: 'Strapi', type: 'strapi', text: 'strapi' },
@@ -86,7 +87,7 @@ export const servicesData = [
   {
     id: 'service-app',
     title: 'Application Development',
-    description: 'We develop successful data-driven strategies to deal with the different mobile and enterprise application challenges.',
+    description: 'Scalable mobile and enterprise applications built with efficient architecture and data-driven functionality.',
     techBadges: [
       { name: 'Shopify', type: 'shopify' },
       { name: 'WooCommerce', type: 'woocommerce', text: 'Woo' },
@@ -96,7 +97,7 @@ export const servicesData = [
   {
     id: 'service-auto',
     title: 'Automation',
-    description: 'Using the latest technology, our custom automation services deliver seamless efficiency and streamline your workflows.',
+    description: 'Smart automation solutions that simplify workflows, reduce manual effort, and improve operational efficiency.',
     techBadges: [
       { name: 'Android', type: 'android', text: 'android' },
       { name: 'iOS/Apple', type: 'ios' },
@@ -106,7 +107,7 @@ export const servicesData = [
   {
     id: 'service-consult',
     title: 'IT Consultation',
-    description: 'Expert technical strategies, scalable architecture roadmap definitions, security compliance audits, and cloud readiness assessments.',
+    description: 'Expert guidance on technology strategy, system architecture, security, and cloud readiness to support better decisions.',
     techBadges: [
       { name: 'Strategy', type: 'blocks', text: 'Strategy' },
       { name: 'Audit', type: 'strapi', text: 'Audit' },
@@ -116,7 +117,7 @@ export const servicesData = [
   {
     id: 'service-marketing',
     title: 'Digital Marketing',
-    description: 'Data-driven digital marketing strategies that amplify your brand reach, drive high-intent traffic, and convert audiences across every online channel.',
+    description: 'Result-driven strategies focused on increasing visibility, attracting the right audience, and improving conversions.',
     techBadges: [
       { name: 'Google Ads', type: 'blocks', text: 'Google Ads' },
       { name: 'Meta Ads', type: 'strapi', text: 'Meta Ads' },
@@ -126,7 +127,7 @@ export const servicesData = [
   {
     id: 'service-seo',
     title: 'Search Engine Optimization',
-    description: 'Dominate search rankings with technical SEO audits, keyword architecture, on-page optimization, and authoritative link-building campaigns.',
+    description: 'Performance-focused SEO including technical audits, keyword strategy, on-page optimization, and link-building improvements.',
     techBadges: [
       { name: 'On-Page SEO', type: 'blocks', text: 'On-Page' },
       { name: 'Link Building', type: 'strapi', text: 'Links' },
