@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import usePageMetadata from "../hooks/usePageMetadata";
 import useScrollReveal from "../hooks/useScrollReveal";
+import { motion } from "motion/react";
 import "./Solutions.css";
 
 // Import Video
@@ -216,7 +217,13 @@ function Solutions() {
   }, []);
 
   return (
-    <div className="solutions-page-wrapper">
+    <motion.div 
+      className="solutions-page-wrapper"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+    >
       {/* 1. SOLUTIONS HERO SECTION */}
       <section className="solutions-hero-banner">
         {/* Dynamic moving green blurred gradient particles */}
@@ -437,7 +444,7 @@ function Solutions() {
           </div>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 }
 

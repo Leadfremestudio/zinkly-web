@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
+import { AnimatePresence } from 'motion/react';
 
 // Global Layout Components
 import Header from './components/Header';
@@ -36,6 +37,7 @@ function App() {
   const [cursorText, setCursorText] = useState("");
   const [isCursorActive, setIsCursorActive] = useState(false);
   const [isCursorDark, setIsCursorDark] = useState(false);
+  const location = useLocation();
 
   // 1. Core scroll raw coordinates tracker for CSS variables
   useEffect(() => {
@@ -99,7 +101,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       {/* Route scroll position orchestrator */}
       <ScrollToTop />
 
@@ -107,50 +109,52 @@ function App() {
       <Header />
 
       {/* Primary Routing Shells */}
-      <Routes>
-        <Route 
-          path="/" 
-          element={
-            <Home 
-              setCursorText={setCursorText} 
-              setIsCursorActive={setIsCursorActive} 
-              setIsCursorDark={setIsCursorDark} 
-            />
-          } 
-        />
-        <Route 
-          path="/solutions" 
-          element={
-            <Solutions 
-              setCursorText={setCursorText} 
-              setIsCursorActive={setIsCursorActive} 
-              setIsCursorDark={setIsCursorDark} 
-            />
-          } 
-        />
-        
-        {/* Redirect deleted routes to Home to prevent 404 page breaks */}
-        <Route path="/about" element={<Navigate to="/" replace />} />
-        <Route path="/services" element={<Navigate to="/" replace />} />
-        <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
-        <Route path="/projects" element={<Navigate to="/" replace />} />
-        <Route path="/projects/:id" element={<Navigate to="/" replace />} />
-        <Route path="/insights" element={<Navigate to="/" replace />} />
-        <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
-        <Route 
-          path="/contact" 
-          element={
-            <Contact 
-              setCursorText={setCursorText} 
-              setIsCursorActive={setIsCursorActive} 
-              setIsCursorDark={setIsCursorDark} 
-            />
-          } 
-        />
-        
-        {/* Fallback route */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route 
+            path="/" 
+            element={
+              <Home 
+                setCursorText={setCursorText} 
+                setIsCursorActive={setIsCursorActive} 
+                setIsCursorDark={setIsCursorDark} 
+              />
+            } 
+          />
+          <Route 
+            path="/solutions" 
+            element={
+              <Solutions 
+                setCursorText={setCursorText} 
+                setIsCursorActive={setIsCursorActive} 
+                setIsCursorDark={setIsCursorDark} 
+              />
+            } 
+          />
+          
+          {/* Redirect deleted routes to Home to prevent 404 page breaks */}
+          <Route path="/about" element={<Navigate to="/" replace />} />
+          <Route path="/services" element={<Navigate to="/" replace />} />
+          <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
+          <Route path="/projects" element={<Navigate to="/" replace />} />
+          <Route path="/projects/:id" element={<Navigate to="/" replace />} />
+          <Route path="/insights" element={<Navigate to="/" replace />} />
+          <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
+          <Route 
+            path="/contact" 
+            element={
+              <Contact 
+                setCursorText={setCursorText} 
+                setIsCursorActive={setIsCursorActive} 
+                setIsCursorDark={setIsCursorDark} 
+              />
+            } 
+          />
+          
+          {/* Fallback route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AnimatePresence>
 
       {/* Global Rich Conversion Footer */}
       <Footer />
@@ -167,7 +171,7 @@ function App() {
 
       {/* Premium Floating Back-to-Top Navigation */}
       <BackToTop />
-    </BrowserRouter>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import contactBg from "../assets/contact-bg.jpg";
+import { motion } from "motion/react";
 import "./Contact.css";
 
 function Contact() {
@@ -36,7 +37,13 @@ function Contact() {
   };
 
   return (
-    <main className="contact-page-container">
+    <motion.main 
+      className="contact-page-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+    >
       {/* 1. Upper Section: Background Image & Contact Form */}
       <section className="contact-sec">
         <div
@@ -139,7 +146,7 @@ function Contact() {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }
 
