@@ -960,6 +960,12 @@ body.menu-open-scroll-lock {
     box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@media (max-width: 1024px), (pointer: coarse) {
+  .custom-cursor-follower {
+    display: none !important;
+  }
+}
+
 .custom-cursor-follower.active {
   width: 96px;
   height: 96px;
