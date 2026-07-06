@@ -253,7 +253,7 @@ function Solutions() {
         </div>
       </section>
 
-      {/* 2. LOGO MARQUEE SECTION (Pasted from About page) */}
+      {/* 2. LOGO MARQUEE SECTION (Disabled for now)
       <section className="logo-marquee-sec">
         <div className="logo-marquee-container">
           <div className="logo-marquee-track track-left">
@@ -291,6 +291,7 @@ function Solutions() {
           </div>
         </div>
       </section>
+      */}
 
       {/* 4. ABOUT US DESCRIPTION SECTION (Pasted from About page) */}
       <section className="about-desc-sec reveal reveal-up">

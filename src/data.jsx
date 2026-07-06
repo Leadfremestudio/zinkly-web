@@ -26,7 +26,7 @@ export const heroSlides = [
     description: '',
     bg: slide1
   },
-  {
+  /* {
     id: 1,
     label: 'Solutions',
     subtitle: 'Innovation • Performance • Speed',
@@ -42,7 +42,7 @@ export const heroSlides = [
     ),
     description: 'Empowering your business with high-performance architectures, premium tailored web portals, and frictionless user experiences.',
     bg: slide2
-  },
+  }, */
   {
     id: 2,
     label: 'Systems',

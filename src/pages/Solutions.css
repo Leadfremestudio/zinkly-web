@@ -559,8 +559,9 @@ body.solutions-header-theme .menu-burger:hover .burger-line {
 .about-desc-sec {
   position: relative;
   padding: 120px 8%;
-  background-color: #ffffff;
-  border: none;
+  background-color: #f8fafc; /* premium clean light grey to feel section gap */
+  border-top: 1px solid #edf2f7;
+  border-bottom: 1px solid #edf2f7;
   z-index: 10;
   width: 100%;
 }
