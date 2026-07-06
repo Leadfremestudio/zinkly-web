@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import zinklyLogo from '../assets/zinkly-logo.png';
 
 function Footer() {
   return (
@@ -8,7 +9,7 @@ function Footer() {
         {/* Top Header Row: Logo & Social Media */}
         <div className="footer-top-row">
           <Link to="/" className="footer-logo-link">
-            <span className="logo-text-zinkly">zinkly</span>
+            <img src={zinklyLogo} alt="Zinkly Logo" className="footer-logo-img" />
           </Link>
           
           <div className="footer-social-section">

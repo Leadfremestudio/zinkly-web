@@ -23,6 +23,19 @@
   z-index: 101;
 }
 
+.logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 30px;
+  }
+}
+
 .logo-main {
   font-family: var(--font-headings);
   font-size: 28px;
@@ -3137,6 +3150,19 @@ body.menu-open-scroll-lock {
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.03em;
+}
+
+.footer-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .footer-logo-img {
+    height: 30px;
+  }
 }
 
 .footer-social-section {
