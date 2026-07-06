@@ -29,9 +29,8 @@ function Header() {
     };
   }, [menuOpen]);
 
-  const isLightTheme = document.body.classList.contains('solutions-header-theme') ||
-                       location.pathname === '/solutions' ||
-                       location.pathname === '/contact';
+  const isLightTheme = location.pathname.toLowerCase() === '/solutions' ||
+                       location.pathname.toLowerCase() === '/contact';
 
   return (
     <header className={`app-header ${menuOpen ? 'menu-expanded' : ''}`}>
