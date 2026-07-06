@@ -204,16 +204,16 @@
 /* Responsive Adjustments */
 @media (max-width: 1024px) {
   .contact-main-container {
-    padding: 60px 5%;
+    padding: 40px 5%;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 30px;
   }
 
   .contact-left-col {
-    text-align: center;
+    text-align: left;
   }
 
   .contact-right-col {
@@ -222,17 +222,22 @@
 
   .contact-form-card {
     max-width: 100%;
+    padding: 36px 24px; /* Tighter padding for mobile screen forms */
   }
 }
 
 @media (max-width: 768px) {
   .contact-bg-wrapper {
+    background-image: none !important; /* Disable background image on mobile viewports */
     min-height: auto;
-    background-size: cover;
+  }
+
+  .contact-second-sec {
+    padding: 40px 5%; /* Align section padding consistently with top container */
   }
 
   .contact-info-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 32px;
   }
 }
