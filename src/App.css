@@ -3671,6 +3671,32 @@ body.menu-open-scroll-lock {
   transform: translateX(0);
 }
 
+/* WhatsApp Mobile / Responsive alignment adjustments */
+@media (max-width: 768px) {
+  .whatsapp-floating-container {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .whatsapp-link-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+  }
+
+  .whatsapp-link-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .whatsapp-tooltip {
+    right: 62px;
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+
 /* ============================================================
    RESPONSIVE STYLES FOR RESTORED ABOUT & SERVICES SECTIONS
    ============================================================ */
