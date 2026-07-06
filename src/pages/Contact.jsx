@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import contactBg from "../assets/contact-bg.jpg";
 import { motion } from "motion/react";
+import usePageMetadata from "../hooks/usePageMetadata";
 import "./Contact.css";
 
 function Contact() {
+  usePageMetadata(
+    "Contact Us",
+    "Connect with Zinkly's custom software development and IT consulting team. Contact us for scalable software systems, web application architectures, and automation solutions in Thrissur, Kerala, India."
+  );
+
   useEffect(() => {
     document.body.classList.add("solutions-header-theme");
     return () => {
