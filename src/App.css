@@ -935,19 +935,19 @@ body.menu-open-scroll-lock {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
-  margin-top: -4px; /* Perfect pointer tip centering */
-  margin-left: -4px;
+  width: 0;
+  height: 0;
+  margin-top: 0;
+  margin-left: 0;
   pointer-events: none;
   z-index: 9999;
   display: block;
   will-change: transform;
   opacity: 0;
-  background-color: var(--primary-green);
+  background-color: transparent;
   border-radius: 50%;
   border: 0 solid transparent;
-  box-shadow: 0 0 10px rgba(19, 181, 92, 0.6);
+  box-shadow: none;
   transition:
     width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
