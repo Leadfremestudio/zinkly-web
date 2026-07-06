@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import zinklyLogo from '../assets/zinkly-logo.png';
+import zinklyLogoBlack from '../assets/zinkly-logo-black.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -27,10 +29,14 @@ function Header() {
     };
   }, [menuOpen]);
 
+  const isLightTheme = document.body.classList.contains('solutions-header-theme') ||
+                       location.pathname === '/solutions' ||
+                       location.pathname === '/contact';
+
   return (
     <header className={`app-header ${menuOpen ? 'menu-expanded' : ''}`}>
       <Link to="/" className="logo-container" aria-label="Zinkly Home" onClick={closeMenu}>
-        <img src={zinklyLogo} alt="Zinkly Logo" className="logo-img" />
+        <img src={isLightTheme ? zinklyLogoBlack : zinklyLogo} alt="Zinkly Logo" className="logo-img" />
       </Link>
 
       <nav 
