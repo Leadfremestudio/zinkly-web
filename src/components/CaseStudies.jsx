@@ -3,10 +3,7 @@ import { caseStudiesData, fallbackPreviewImage } from '../data';
 // Reusable CaseStudyCard Sub-Component
 const CaseStudyCard = ({ project, setCursorText, setIsCursorActive }) => {
   return (
-    <a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
       className={`bento-case-card ${project.gridClass}`}
       onMouseEnter={() => {
         setCursorText(project.category);
@@ -57,7 +54,7 @@ const CaseStudyCard = ({ project, setCursorText, setIsCursorActive }) => {
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 
