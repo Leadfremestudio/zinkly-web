@@ -422,24 +422,22 @@ function Solutions() {
           </div>
         </div>
 
-        {/* Subsection 6: Search Engine Optimization (Left Image, Right Content, Grey Background) */}
+        {/* Subsection 6: Custom Software Development (Left Image, Right Content, Grey Background) */}
         <div className="detailed-service-item bg-grey reveal reveal-up">
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&fit=crop&w=800&q=80"
-              alt="Zinkly Search Engine Optimization, keyword ranking index metrics"
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+              alt="Zinkly Custom Software Development, IDE editor with React code"
             />
           </div>
           <div className="service-item-content">
-            <span className="service-item-badge">SEO</span>
+            <span className="service-item-badge">Software</span>
             <h2 className="service-item-title">
-              Authority Architecture & <br />
-              <span className="accent-green">Search Ranking Domination</span>
+              Scalable Architecture & <br />
+              <span className="accent-green">Custom Software Systems</span>
             </h2>
             <p className="service-item-desc paragraph-text">
-              Capture search intent and scale organic traffic. We specialize in
-              deep technical SEO audits, keyword gap architectures, Core Web
-              Vitals optimization, and high-quality link-building programs.
+              Build future-proof digital tools tailored to your business operations. We design, engineer, and deploy high-performance web systems, cloud architectures, customized APIs, and automation tools built to scale.
             </p>
           </div>
         </div>

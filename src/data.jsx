@@ -125,13 +125,13 @@ export const servicesData = [
     ]
   },
   {
-    id: 'service-seo',
-    title: 'Search Engine Optimization',
-    description: 'Performance-focused SEO including technical audits, keyword strategy, on-page optimization, and link-building improvements.',
+    id: 'service-software',
+    title: 'Custom Software Development',
+    description: 'Tailored, scalable software solutions engineered to streamline operations, automate business workflows, and support long-term growth.',
     techBadges: [
-      { name: 'On-Page SEO', type: 'blocks', text: 'On-Page' },
-      { name: 'Link Building', type: 'strapi', text: 'Links' },
-      { name: 'Core Web Vitals', type: 'node', text: 'CWV' }
+      { name: 'API Integrations', type: 'blocks', text: 'APIs' },
+      { name: 'Cloud Databases', type: 'strapi', text: 'Cloud' },
+      { name: 'Scalable Systems', type: 'node', text: 'Architecture' }
     ]
   }
 ];
