@@ -24,7 +24,7 @@
 }
 
 .logo-img {
-  height: 38px;
+  height: 58px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -32,7 +32,7 @@
 
 @media (max-width: 768px) {
   .logo-img {
-    height: 30px;
+    height: 44px;
   }
 }
 
@@ -3153,7 +3153,7 @@ body.menu-open-scroll-lock {
 }
 
 .footer-logo-img {
-  height: 38px;
+  height: 58px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -3161,7 +3161,7 @@ body.menu-open-scroll-lock {
 
 @media (max-width: 768px) {
   .footer-logo-img {
-    height: 30px;
+    height: 44px;
   }
 }
 
