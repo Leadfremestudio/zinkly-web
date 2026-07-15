@@ -1,11 +1,11 @@
-import slide1 from './assets/slide1.png';
-import slide2 from './assets/slide2.png';
-import slide3 from './assets/slide3.png';
-import caseKnowbest from './assets/case_knowbest.png';
-import caseInfiny from './assets/case_infiny.png';
-import caseAcadome from './assets/case_acadome.png';
-import caseEvergreen from './assets/case_evergreen.png';
-import casePreviewDefault from './assets/case_preview_default.png';
+import slide1 from './assets/slide1.webp';
+import slide2 from './assets/slide2.webp';
+import slide3 from './assets/slide3.webp';
+import caseKnowbest from './assets/case_knowbest.webp';
+import caseInfiny from './assets/case_infiny.webp';
+import caseAcadome from './assets/case_acadome.webp';
+import caseEvergreen from './assets/case_evergreen.webp';
+import casePreviewDefault from './assets/case_preview_default.webp';
 
 // 1. Hero slides configurations
 export const heroSlides = [

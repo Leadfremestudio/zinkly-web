@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import zinklyLogo from '../assets/zinkly-logo.png';
-import zinklyLogoBlack from '../assets/zinkly-logo-black.png';
+import zinklyLogo from '../assets/zinkly-logo.webp';
+import zinklyLogoBlack from '../assets/zinkly-logo-black.webp';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

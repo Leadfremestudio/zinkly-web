@@ -1,5 +1,5 @@
-import aboutOfficeMain from '../assets/about_office_main.png';
-import aboutOfficeSub from '../assets/about_office_sub.png';
+import aboutOfficeMain from '../assets/about_office_main.webp';
+import aboutOfficeSub from '../assets/about_office_sub.webp';
 
 function About({ setCursorText, setIsCursorActive, setIsCursorDark }) {
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import { AnimatePresence } from 'motion/react';
@@ -10,10 +10,10 @@ import CustomCursor from './components/CustomCursor';
 import FloatingChat from './components/FloatingChat';
 import BackToTop from './components/BackToTop';
 
-// Multi-Page shells
-import Home from './pages/Home';
-import Solutions from './pages/Solutions';
-import Contact from './pages/Contact';
+// Multi-Page shells using lazy loading for bundle optimization
+const Home = lazy(() => import('./pages/Home'));
+const Solutions = lazy(() => import('./pages/Solutions'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 import './App.css';
 
@@ -39,11 +39,17 @@ function App() {
   const [isCursorDark, setIsCursorDark] = useState(false);
   const location = useLocation();
 
-  // 1. Core scroll raw coordinates tracker for CSS variables
+  // 1. Core scroll raw coordinates tracker for CSS variables (optimized: only runs scroll listener when Hero is visible)
   useEffect(() => {
     let rafId;
+    let isHeroVisible = false;
+    let scrollListenerAdded = false;
+
     const handleScroll = () => {
-      document.documentElement.style.setProperty('--scroll-y-raw', window.scrollY.toString());
+      const hero = document.getElementById('carousel-hero');
+      if (hero) {
+        hero.style.setProperty('--scroll-y-raw', window.scrollY.toString());
+      }
       rafId = null;
     };
 
@@ -53,14 +59,52 @@ function App() {
       }
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    handleScroll();
+    const enableScrollListener = () => {
+      if (!scrollListenerAdded) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+        scrollListenerAdded = true;
+        handleScroll();
+      }
+    };
+
+    const disableScrollListener = () => {
+      if (scrollListenerAdded) {
+        window.removeEventListener('scroll', onScroll);
+        scrollListenerAdded = false;
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+    };
+
+    // Use IntersectionObserver to toggle scroll listener based on visibility of the Hero
+    const hero = document.getElementById('carousel-hero');
+    let observer;
+    if (hero && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isHeroVisible = entry.isIntersecting;
+          if (isHeroVisible) {
+            enableScrollListener();
+          } else {
+            disableScrollListener();
+          }
+        });
+      }, { threshold: 0 });
+      observer.observe(hero);
+    } else {
+      // Fallback: if no observer or element not found immediately, run listener as fallback
+      enableScrollListener();
+    }
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (rafId) cancelAnimationFrame(rafId);
+      disableScrollListener();
+      if (observer) {
+        observer.disconnect();
+      }
     };
-  }, []);
+  }, [location.pathname]);
 
   // 2. Premium Lenis smooth scroll binds
   useEffect(() => {
@@ -110,50 +154,56 @@ function App() {
 
       {/* Primary Routing Shells */}
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route 
-            path="/" 
-            element={
-              <Home 
-                setCursorText={setCursorText} 
-                setIsCursorActive={setIsCursorActive} 
-                setIsCursorDark={setIsCursorDark} 
-              />
-            } 
-          />
-          <Route 
-            path="/solutions" 
-            element={
-              <Solutions 
-                setCursorText={setCursorText} 
-                setIsCursorActive={setIsCursorActive} 
-                setIsCursorDark={setIsCursorDark} 
-              />
-            } 
-          />
-          
-          {/* Redirect deleted routes to Home to prevent 404 page breaks */}
-          <Route path="/about" element={<Navigate to="/" replace />} />
-          <Route path="/services" element={<Navigate to="/" replace />} />
-          <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
-          <Route path="/projects" element={<Navigate to="/" replace />} />
-          <Route path="/projects/:id" element={<Navigate to="/" replace />} />
-          <Route path="/insights" element={<Navigate to="/" replace />} />
-          <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
-          <Route 
-            path="/contact" 
-            element={
-              <Contact 
-                setCursorText={setCursorText} 
-                setIsCursorActive={setIsCursorActive} 
-                setIsCursorDark={setIsCursorDark} 
-              />
-            } 
-          />
-          
-          {/* Fallback route */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={
+          <div className="lazy-loading-spinner-container">
+            <div className="lazy-loading-spinner"></div>
+          </div>
+        }>
+          <Routes location={location} key={location.pathname}>
+            <Route 
+              path="/" 
+              element={
+                <Home 
+                  setCursorText={setCursorText} 
+                  setIsCursorActive={setIsCursorActive} 
+                  setIsCursorDark={setIsCursorDark} 
+                />
+              } 
+            />
+            <Route 
+              path="/solutions" 
+              element={
+                <Solutions 
+                  setCursorText={setCursorText} 
+                  setIsCursorActive={setIsCursorActive} 
+                  setIsCursorDark={setIsCursorDark} 
+                />
+              } 
+            />
+            
+            {/* Redirect deleted routes to Home to prevent 404 page breaks */}
+            <Route path="/about" element={<Navigate to="/" replace />} />
+            <Route path="/services" element={<Navigate to="/" replace />} />
+            <Route path="/services/:serviceId" element={<Navigate to="/" replace />} />
+            <Route path="/projects" element={<Navigate to="/" replace />} />
+            <Route path="/projects/:id" element={<Navigate to="/" replace />} />
+            <Route path="/insights" element={<Navigate to="/" replace />} />
+            <Route path="/insights/:articleId" element={<Navigate to="/" replace />} />
+            <Route 
+              path="/contact" 
+              element={
+                <Contact 
+                  setCursorText={setCursorText} 
+                  setIsCursorActive={setIsCursorActive} 
+                  setIsCursorDark={setIsCursorDark} 
+                />
+              } 
+            />
+            
+            {/* Fallback route */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </AnimatePresence>
 
       {/* Global Rich Conversion Footer */}

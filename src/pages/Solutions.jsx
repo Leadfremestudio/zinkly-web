@@ -195,26 +195,37 @@ function Solutions() {
   );
 
   const videoRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Sync scroll reveals on content reveal classes
   useScrollReveal();
 
   // Sync video play and clean header styles
   useEffect(() => {
+    const checkMobile = () => {
+      const isMobileOrTouch = window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      setIsMobile(isMobileOrTouch);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+
     // Enable light theme header on body
     document.body.classList.add("solutions-header-theme");
 
-    // Explicitly guarantee play is invoked on mount
-    if (videoRef.current) {
+    return () => {
+      document.body.classList.remove("solutions-header-theme");
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Explicitly guarantee play is invoked when video is active
+    if (!isMobile && videoRef.current) {
       videoRef.current.play().catch((err) => {
         console.log("Autoplay blocked or video error:", err);
       });
     }
-
-    return () => {
-      document.body.classList.remove("solutions-header-theme");
-    };
-  }, []);
+  }, [isMobile]);
 
   return (
     <motion.div 
@@ -226,22 +237,27 @@ function Solutions() {
     >
       {/* 1. SOLUTIONS HERO SECTION */}
       <section className="solutions-hero-banner">
-        {/* Dynamic moving green blurred gradient particles */}
-        <div className="solutions-moving-particle particle-1"></div>
-        <div className="solutions-moving-particle particle-2"></div>
-
         {/* Centered Single Video Player (max-width adjusted for screen size) */}
         <div className="solutions-hero-video-container">
-          <video
-            ref={videoRef}
-            src={solutionsVideo}
-            className="solutions-hero-video"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-          />
+          {!isMobile ? (
+            <video
+              ref={videoRef}
+              src={solutionsVideo}
+              className="solutions-hero-video"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="none"
+            />
+          ) : (
+            <div className="solutions-hero-video-fallback">
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" className="solutions-fallback-svg">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" />
+              </svg>
+            </div>
+          )}
         </div>
 
         {/* Heading & description text directly UNDER the video */}

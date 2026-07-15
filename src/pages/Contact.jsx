@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import contactBg from "../assets/contact-bg.jpg";
+import contactBg from "../assets/contact-bg.webp";
 import { motion } from "motion/react";
 import usePageMetadata from "../hooks/usePageMetadata";
 import "./Contact.css";

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import zinklyLogo from '../assets/zinkly-logo.png';
+import zinklyLogo from '../assets/zinkly-logo.webp';
 
 function Footer() {
   return (
