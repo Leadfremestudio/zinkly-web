@@ -514,7 +514,7 @@ body.menu-open-scroll-lock {
 
 .stat-num {
   font-family: var(--font-headings);
-  font-size: 38px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.1;

@@ -24,7 +24,13 @@ export const heroSlides = [
       </>
     ),
     description: '',
-    bg: slide1
+    bg: slide1,
+    stats: [
+      { num: 'Tailored', suffix: '', label: 'Custom Architectures' },
+      { num: 'Direct', suffix: '', label: 'Developer Communication' },
+      { num: 'Swift', suffix: '', label: 'MVP Delivery in Weeks' },
+      { num: 'Scale', suffix: '', label: 'Modular Codebase Setup' }
+    ]
   },
   /* {
     id: 1,
@@ -59,16 +65,22 @@ export const heroSlides = [
       </>
     ),
     description: '',
-    bg: slide3
+    bg: slide3,
+    stats: [
+      { num: '100', suffix: '%', label: 'Quality Guarantee' },
+      { num: '1-on-1', suffix: '', label: 'Dedicated Architect Support' },
+      { num: 'Zero', suffix: '', label: 'Technical Debt Commitment' },
+      { num: 'Secure', suffix: '', label: 'Modern Security Practices' }
+    ]
   }
 ];
 
 // 2. Main company stats
 export const companyStats = [
-  { num: '16', label: 'Years of Expertise' },
-  { num: '800', label: 'Clients Globally' },
-  { num: '150', label: 'Dedicated Zinklers' },
-  { num: '1000', label: 'Completed Projects' }
+  { num: '100', suffix: '%', label: 'Custom Tailored Solutions' },
+  { num: 'Direct', suffix: '', label: 'Developer Communication' },
+  { num: 'Swift', suffix: '', label: 'Sprint-Based Delivery' },
+  { num: 'Modern', suffix: '', label: 'Optimized Tech Stack' }
 ];
 
 // 3. Reusable Capabilities Services Grid - Total 6 Cards (3 original, 3 requested)

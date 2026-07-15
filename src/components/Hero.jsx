@@ -55,11 +55,13 @@ function Hero() {
 
             {/* Glassmorphic Stats Grid */}
             <div className="stats-grid">
-              {companyStats.map((stat, statIdx) => (
+              {(slide.stats || companyStats).map((stat, statIdx) => (
                 <div key={statIdx} className="stat-card">
                   <div className="stat-num">
                     {stat.num}
-                    <span className="stat-plus">+</span>
+                    {stat.suffix && (
+                      <span className="stat-plus">{stat.suffix}</span>
+                    )}
                   </div>
                   <div className="stat-label">{stat.label}</div>
                 </div>
