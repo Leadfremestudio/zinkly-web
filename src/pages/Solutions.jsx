@@ -195,37 +195,26 @@ function Solutions() {
   );
 
   const videoRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
 
   // Sync scroll reveals on content reveal classes
   useScrollReveal();
 
   // Sync video play and clean header styles
   useEffect(() => {
-    const checkMobile = () => {
-      const isMobileOrTouch = window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-      setIsMobile(isMobileOrTouch);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile, { passive: true });
-
     // Enable light theme header on body
     document.body.classList.add("solutions-header-theme");
 
-    return () => {
-      document.body.classList.remove("solutions-header-theme");
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
-
-  useEffect(() => {
     // Explicitly guarantee play is invoked when video is active
-    if (!isMobile && videoRef.current) {
+    if (videoRef.current) {
       videoRef.current.play().catch((err) => {
         console.log("Autoplay blocked or video error:", err);
       });
     }
-  }, [isMobile]);
+
+    return () => {
+      document.body.classList.remove("solutions-header-theme");
+    };
+  }, []);
 
   return (
     <motion.div 
@@ -239,25 +228,16 @@ function Solutions() {
       <section className="solutions-hero-banner">
         {/* Centered Single Video Player (max-width adjusted for screen size) */}
         <div className="solutions-hero-video-container">
-          {!isMobile ? (
-            <video
-              ref={videoRef}
-              src={solutionsVideo}
-              className="solutions-hero-video"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="none"
-            />
-          ) : (
-            <div className="solutions-hero-video-fallback">
-              <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" className="solutions-fallback-svg">
-                <circle cx="12" cy="12" r="10" />
-                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" />
-              </svg>
-            </div>
-          )}
+          <video
+            ref={videoRef}
+            src={solutionsVideo}
+            className="solutions-hero-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          />
         </div>
 
         {/* Heading & description text directly UNDER the video */}
