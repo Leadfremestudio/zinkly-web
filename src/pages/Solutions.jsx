@@ -8,6 +8,14 @@ import "./Solutions.css";
 // Import Video
 import solutionsVideo from "../assets/videos/Solutions_Animation_4d19aed67d.mp4";
 
+// Import Images
+import bespokeWebImg from "../assets/oursolution/BespokeHeadlesWeb Solutions.avif";
+import bespokeHeadlessImg from "../assets/oursolution/BespokeHeadless.avif";
+import dataDrivenImg from "../assets/oursolution/Data-DrivenCampaigns &GrowthMarketing.avif";
+import intelligentPipelineImg from "../assets/oursolution/IntelligentPipeline.avif";
+import scalableArchImg from "../assets/oursolution/ScalableArchitetureCustomSoftareSystems.avif";
+import computerLabImg from "../assets/oursolution/modern-equipped-computer-lab.jpg.avif";
+
 // Crisp, high-end vector SVG brand logos for Logo Marquee Section
 const BrandLogos = {
   TaskUs: () => (
@@ -322,7 +330,7 @@ function Solutions() {
           </div>
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+              src={bespokeWebImg}
               alt="Zinkly Advanced Web Engineering and Headless Architectures"
             />
           </div>
@@ -332,7 +340,7 @@ function Solutions() {
         <div className="detailed-service-item bg-grey reveal reveal-up">
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80"
+              src={bespokeHeadlessImg}
               alt="Zinkly Mobile App Engineering & Enterprise SaaS Portals"
             />
           </div>
@@ -369,7 +377,7 @@ function Solutions() {
           </div>
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"
+              src={intelligentPipelineImg}
               alt="Zinkly Intelligent Automation pipelines and cloud syncs"
             />
           </div>
@@ -379,7 +387,7 @@ function Solutions() {
         <div className="detailed-service-item bg-grey reveal reveal-up">
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+              src={computerLabImg}
               alt="Zinkly IT Consultation, roadmap definitions, and technical planning"
             />
           </div>
@@ -413,7 +421,7 @@ function Solutions() {
           </div>
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+              src={dataDrivenImg}
               alt="Zinkly Performance Marketing, Google Ads and conversion dashboards"
             />
           </div>
@@ -423,7 +431,7 @@ function Solutions() {
         <div className="detailed-service-item bg-grey reveal reveal-up">
           <div className="service-item-image">
             <img
-              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+              src={scalableArchImg}
               alt="Zinkly Custom Software Development, IDE editor with React code"
             />
           </div>
