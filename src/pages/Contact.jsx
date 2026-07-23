@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import contactBg from "../assets/contact-bg.webp";
+import contactBg from "../assets/contact-bg-clean.webp";
 import { motion } from "motion/react";
 import usePageMetadata from "../hooks/usePageMetadata";
 import "./Contact.css";
@@ -60,7 +60,6 @@ function Contact() {
             <div className="contact-grid">
               {/* Left Column: Headline */}
               <div className="contact-left-col">
-                <h1 className="contact-headline">CONTACT US</h1>
               </div>
 
               {/* Right Column: Form Card */}
