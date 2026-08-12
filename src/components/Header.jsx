@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import zinklyLogo from '../assets/zinkly-logo.webp';
-import zinklyLogoBlack from '../assets/zinkly-logo-black.webp';
+import zinklyLogo from '../assets/zinkly-logo.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,7 +34,7 @@ function Header() {
   return (
     <header className={`app-header ${menuOpen ? 'menu-expanded' : ''}`}>
       <Link to="/" className="logo-container" aria-label="Zinkly Home" onClick={closeMenu}>
-        <img src={isLightTheme ? zinklyLogoBlack : zinklyLogo} alt="Zinkly Logo" className="logo-img" />
+        <img src={zinklyLogo} alt="Zinkly Logo" className="logo-img" />
       </Link>
 
       <nav 
