@@ -24,7 +24,7 @@
 }
 
 .logo-img {
-  height: 58px;
+  height: 45px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -32,7 +32,7 @@
 
 @media (max-width: 768px) {
   .logo-img {
-    height: 44px;
+    height: 40px;
   }
 }
 
