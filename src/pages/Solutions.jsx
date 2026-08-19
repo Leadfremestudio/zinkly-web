@@ -20,8 +20,10 @@ import computerLabImg from "../assets/oursolution/modern-equipped-computer-lab.j
 
 function Solutions() {
   usePageMetadata(
-    "Our Solutions",
-    "Technology should empower businesses, not complicate them. At Zinkly, we build intelligent digital solutions that help organizations innovate faster, streamline operations, and unlock sustainable growth.",
+    "Custom Software, Web App & SaaS Solutions | Zinkly Kerala",
+    "Explore Zinkly's custom software development, bespoke headless web applications, SaaS MVP engineering, cloud architecture, and digital transformation services in Kerala.",
+    "custom software development Kerala, web application development Kerala, SaaS product development India, headless web solutions, MVP development Kerala, digital transformation agency, enterprise software solutions Thrissur",
+    "/solutions"
   );
 
   const videoRef = useRef(null);

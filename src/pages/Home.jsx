@@ -11,7 +11,12 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { motion } from 'motion/react';
 
 function Home({ setCursorText, setIsCursorActive, setIsCursorDark }) {
-  usePageMetadata('Built Around Your Business', 'Design your dreams and scale your software systems. Zinkly is a high-performance premium IT engineering and digital transformation consulting agency.');
+  usePageMetadata(
+    'Zinkly | Custom Software Development Company in Thrissur, Kerala',
+    'Looking for the best custom software development company in Thrissur, Kerala? Zinkly engineers high-performance web systems, custom software architectures, and MVP solutions for growing businesses.',
+    'software development company in Thrissur, IT company in Thrissur Kerala, custom software development Thrissur, web application development Kerala, MVP development company Kerala, SaaS development company Kerala, hire software developer Thrissur, software agency Thrissur, IT consulting Kerala',
+    '/'
+  );
   useScrollReveal();
 
   return (

@@ -6,8 +6,10 @@ import "./Contact.css";
 
 function Contact() {
   usePageMetadata(
-    "Contact Us",
-    "Connect with Zinkly's custom software development and IT consulting team. Contact us for scalable software systems, web application architectures, and automation solutions in Thrissur, Kerala, India."
+    "Hire Software Developers & IT Consulting | Thrissur, Kerala | Zinkly",
+    "Partner with Zinkly for custom software engineering, startup MVP development, and IT consulting in Thrissur, Kerala. Request a consultation or software quote today.",
+    "hire software developer Thrissur, IT company in Thrissur Kerala, software development quote Kerala, custom software consultation, hire dedicated developers India, software engineering agency Thrissur",
+    "/contact"
   );
 
   useEffect(() => {
